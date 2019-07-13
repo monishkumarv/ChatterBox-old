@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp"
+    android:id="@+id/layout_list_messages">
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="From"
+        android:id="@+id/from"
+        android:textColor="#000"
+        android:layout_marginLeft="30dp"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Messages appears here"
+    android:id="@+id/disp_msg"
+    android:textColor="#000"
+    android:layout_centerVertical="true"
+    android:layout_marginLeft="30dp"
+    android:textSize="17sp"
+    android:layout_below="@+id/from" />
+
+</RelativeLayout>
