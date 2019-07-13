@@ -66,10 +66,6 @@ public class HomePage extends AppCompatActivity {
 
         EditText new_friend = findViewById(R.id.friend_phoneNo);
 
-       // TODO: Retrieve the old list (sharedprefernce)
-       // TODO: Update the list with new friend and then save it...also check if you are already friends with the guy
-
-
         friendslist.add(new_friend.getText().toString());
         new_friend.setText("+91");
         mdatabaseReference.child(myPhoneNo).child("friends").setValue(friendslist);

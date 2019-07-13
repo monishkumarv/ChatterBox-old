@@ -29,7 +29,6 @@ public class ChatWindow extends AppCompatActivity {
     public FirebaseAuth mAuth;
     public FirebaseDatabase mfirebaseDatabase;
     public DatabaseReference mdatabaseReference;
-    private String TAG1 = "onDataChanged";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,27 +49,6 @@ public class ChatWindow extends AppCompatActivity {
         RetrieveMessages(myPhoneNo,friendPhoneNo,myDisplayMessages,true);
         RetrieveMessages(friendPhoneNo,myPhoneNo,friendDisplayMessages,true);
         callRecyclerView(myDisplayMessages);
-
-//        recreate();
-//        finish();
-//        overridePendingTransition(0,0);
-//        startActivity(getIntent());
-//        overridePendingTransition(0,0);
-
-        // TODO: Use onDataChange method to Refresh page automatically..................
-//        mdatabaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//                callRecyclerView(myDisplayMessages);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//                Log.d(TAG, "error:" + databaseError);
-//
-//            }
-//        });
 
     }
 
