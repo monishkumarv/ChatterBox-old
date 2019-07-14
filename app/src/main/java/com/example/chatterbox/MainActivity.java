@@ -139,17 +139,17 @@ public class MainActivity extends AppCompatActivity {
                             if (checkNewUser == true) {
                                 // TODO: ..........
                                 CreateFirebaseDatabase(user);
-                                Intent intent = new Intent(MainActivity.this, HomePage.class);
+                                Intent intent = new Intent(MainActivity.this, CreateProfileActivity.class);
+                                intent.putExtra("PhoneNo", user.getPhoneNumber());
                                 startActivity(intent);
                             } else {
-                                // TODO: ..........
                                 Intent intent = new Intent(MainActivity.this, HomePage.class);
                                 startActivity(intent);
                             }
 
                             Toast.makeText(MainActivity.this, "Signed in using" + user.getPhoneNumber(), Toast.LENGTH_SHORT).show();
                         } else {
-                            // Sign in failed, display a message and update the UI
+                            // Sign in failed, display a message
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 // The verification code entered was invalid
@@ -166,7 +166,6 @@ public class MainActivity extends AppCompatActivity {
         DatabaseReference mdatabaseReference = mfirebaseDatabase.getReference().child("User Data");
         mdatabaseReference.child(user.getPhoneNumber()).setValue(null);
         mdatabaseReference.child(user.getPhoneNumber()).child("UID").setValue(user.getUid());
-//        mdatabaseReference.child(user.getPhoneNumber()).child("messages").setValue(null);
 
     }
 

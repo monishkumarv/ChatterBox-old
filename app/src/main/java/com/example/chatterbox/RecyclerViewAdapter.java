@@ -2,6 +2,8 @@ package com.example.chatterbox;
 
 import android.content.Context;
 import android.content.Intent;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,15 +12,23 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
 
-    private static final String TAG = "RecyclerViewAdapter";
+    private static final String TAG = "RecyclerViewAdapterLog";
 
     private ArrayList<String> mFriendslist = new ArrayList<>();
     private Context mContext;
+    public String name;
 
     public RecyclerViewAdapter(Context context, ArrayList<String> friendslist) {
         mFriendslist = friendslist;
@@ -36,7 +46,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
         Log.d(TAG, "onBindViewHolder: called.");
-        holder.mPhoneNo.setText(mFriendslist.get(position));
+
+        setName(mFriendslist.get(position),holder);
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,9 +76,39 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mPhoneNo = itemView.findViewById(R.id.email_id);
+            mPhoneNo = itemView.findViewById(R.id.phone_no);
             parentLayout = itemView.findViewById(R.id.layout_list_friends);
         }
+    }
+
+    public void setName(String phoneNo,ViewHolder holder) {
+
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference mReference = mDatabase.getReference().child("User Data").child(phoneNo);
+
+        mReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.child("Name").exists())
+                {
+                    name =dataSnapshot.child("Name").getValue().toString();
+                    holder.mPhoneNo.setText(name);    // Updating RecyclerView with ProfileName(instead of phoneNo)
+
+                }else
+                    {
+                    holder.mPhoneNo.setText(phoneNo);  // If profile is not created already
+
+                }
+
+//                Log.d(TAG,name);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(TAG,"error:" + databaseError);
+            }
+        });
     }
 }
 

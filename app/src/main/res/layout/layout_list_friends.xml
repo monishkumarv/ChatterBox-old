@@ -10,8 +10,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email Id"
-        android:id="@+id/email_id"
+        android:text="Loading..."
+        android:id="@+id/phone_no"
         android:textColor="#000"
         android:layout_centerVertical="true"
         android:layout_marginLeft="30dp"

@@ -30,7 +30,6 @@ public class HomePage extends AppCompatActivity {
     String myPhoneNo;
     private ArrayList<String> friendslist = new ArrayList<>();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +74,7 @@ public class HomePage extends AppCompatActivity {
     }
 
     public void RetrieveFriends(){
-        Toast.makeText(HomePage.this,"Searching 4ur friends...",Toast.LENGTH_LONG).show();
+//        Toast.makeText(HomePage.this,"Searching 4ur friends...",Toast.LENGTH_LONG).show();
         Log.d(TAG,"Retrieving process started");
 
         DatabaseReference newReference = mdatabaseReference.child(myPhoneNo).child("friends");
