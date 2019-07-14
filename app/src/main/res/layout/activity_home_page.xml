@@ -25,19 +25,21 @@
         android:id="@+id/add_friend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="60dp"
         android:onClick="AddFriend"
         android:text="ADD FRIEND"
-        tools:text="add friend"
-        android:layout_marginTop="60dp"
-        android:layout_marginLeft="100dp"/>
+        tools:text="add friend" />
 
     <EditText
         android:id="@+id/friend_phoneNo"
-        android:layout_width="match_parent"
+        android:layout_width="202dp"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:gravity="center"
+        android:inputType="phone"
         android:text="+91"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,10 +48,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="signOut"
-        android:text="Sign out"
+        android:layout_marginLeft="0dp"
         android:layout_marginTop="60dp"
-        android:layout_toRightOf="@+id/add_friend"/>
+        android:layout_toRightOf="@+id/add_friend"
+        android:onClick="signOut"
+        android:text="Sign out" />
 
 
 </RelativeLayout>

@@ -164,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseDatabase mfirebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mdatabaseReference = mfirebaseDatabase.getReference().child("User Data");
-        mdatabaseReference.child(user.getPhoneNumber()).setValue(null);
         mdatabaseReference.child(user.getPhoneNumber()).child("UID").setValue(user.getUid());
 
     }
