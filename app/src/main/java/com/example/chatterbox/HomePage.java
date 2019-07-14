@@ -2,11 +2,15 @@ package com.example.chatterbox;
 
 import android.content.Intent;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -35,6 +39,11 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
+        ActionBar ab = getSupportActionBar();               // Creating an object in ActionBar
+        ab.setLogo(R.drawable.ic_launcher_foreground);
+        ab.setDisplayUseLogoEnabled(true);
+        ab.setDisplayShowHomeEnabled(true);
+
         mAuth = FirebaseAuth.getInstance();
         myPhoneNo = mAuth.getCurrentUser().getPhoneNumber();
 
@@ -45,17 +54,10 @@ public class HomePage extends AppCompatActivity {
         callRecyclerView();
     }
 
-    public void signOut(View view){
-        FirebaseAuth.getInstance().signOut();
-        Toast.makeText(HomePage.this,"Signout Successfull",Toast.LENGTH_LONG).show();
-        Intent i = new Intent(HomePage.this,MainActivity.class);
-        startActivity(i);
-
-    }
 
     private void callRecyclerView(){
         RecyclerView recyclerView = findViewById(R.id.recycler_view_friends);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, this.friendslist);
+        RecyclerViewAdapter_Friends adapter = new RecyclerViewAdapter_Friends(this, this.friendslist);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -107,4 +109,28 @@ public class HomePage extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater mf = getMenuInflater();
+        mf.inflate(R.menu.actionbar_mainmenu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+
+            case R.id.my_profile:
+                Intent intent = new Intent(HomePage.this, ProfileActivity.class);
+                intent.putExtra("PhoneNo", myPhoneNo);
+                startActivity(intent);
+
+            case R.id.settings_id:
+                Toast.makeText(getApplicationContext(),"Settings icon is selected",Toast.LENGTH_SHORT).show();
+            default:
+                return super.onOptionsItemSelected(item);
+
+
+
+        }
+    }
 }

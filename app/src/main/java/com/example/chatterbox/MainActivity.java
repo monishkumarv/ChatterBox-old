@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         phoneNo = findViewById(R.id.enter_phoneNo);
         otp = findViewById(R.id.enter_otp);
         sendotp = findViewById(R.id.send_otp);
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
     public void sendOTP(String phoneNumber) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
@@ -139,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                             if (checkNewUser == true) {
                                 // TODO: ..........
                                 CreateFirebaseDatabase(user);
-                                Intent intent = new Intent(MainActivity.this, CreateProfileActivity.class);
+                                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                                 intent.putExtra("PhoneNo", user.getPhoneNumber());
                                 startActivity(intent);
                             } else {

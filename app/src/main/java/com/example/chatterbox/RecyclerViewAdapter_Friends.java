@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
+public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerViewAdapter_Friends.ViewHolder>{
 
     private static final String TAG = "RecyclerViewAdapterLog";
 
@@ -30,7 +30,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private Context mContext;
     public String name;
 
-    public RecyclerViewAdapter(Context context, ArrayList<String> friendslist) {
+    public RecyclerViewAdapter_Friends(Context context, ArrayList<String> friendslist) {
         mFriendslist = friendslist;
         mContext = context;
     }
