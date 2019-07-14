@@ -11,8 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChatWindow"/>
-        <activity android:name=".HomePage">
+        <activity android:name=".ChatWindow"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".HomePage"
+            android:windowSoftInputMode="adjustResize">
            <intent-filter>
                <action android:name="android.intent.action.MAIN" />
                <action android:name="android.intent.action.VIEW"/>

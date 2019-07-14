@@ -11,21 +11,44 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="From"
-        android:id="@+id/from"
+        android:id="@+id/fromfriend"
         android:textColor="#000"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="25dp"
         android:textSize="12sp"
         android:textStyle="bold" />
 
     <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Messages appears here"
-    android:id="@+id/disp_msg"
-    android:textColor="#000"
-    android:layout_centerVertical="true"
-    android:layout_marginLeft="30dp"
-    android:textSize="17sp"
-    android:layout_below="@+id/from" />
+        android:id="@+id/disp_msg_friend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fromfriend"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@id/fromfriend"
+        android:text="Message"
+        android:textColor="#000"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/disp_msg_you"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fromyou"
+        android:layout_alignEnd="@+id/fromyou"
+        android:layout_marginTop="1dp"
+        android:text="Message"
+        android:textColor="#000"
+        android:textSize="17sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You"
+        android:id="@+id/fromyou"
+        android:textColor="#000"
+        android:layout_marginLeft="320dp"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+
 
 </RelativeLayout>

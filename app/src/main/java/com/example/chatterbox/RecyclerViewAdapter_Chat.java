@@ -38,11 +38,15 @@ public class RecyclerViewAdapter_Chat extends RecyclerView.Adapter<RecyclerViewA
         Log.d(TAG, "onBindViewHolder: called.");
 
         if (mMessageList.get(position).IS_MSG_FROM_YOU) {
-            holder.fromAddress.setText("You");
-            holder.mMessage.setText(mMessageList.get(position).message);
+            holder.fromYou.setText("You");
+            holder.mMessageYou.setText(mMessageList.get(position).message);
+            holder.fromFriend.setText(null);
+            holder.mMessageFriend.setText(null);
         }else {
-            holder.fromAddress.setText("Friend");
-            holder.mMessage.setText(mMessageList.get(position).message);
+            holder.fromFriend.setText("Friend");
+            holder.mMessageFriend.setText(mMessageList.get(position).message);
+            holder.fromYou.setText(null);
+            holder.mMessageYou.setText(null);
         }
         Log.d(TAG, "onBindViewHolder: ended.");
     }
@@ -54,13 +58,15 @@ public class RecyclerViewAdapter_Chat extends RecyclerView.Adapter<RecyclerViewA
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView mMessage,fromAddress;
+        TextView mMessageFriend,fromFriend,mMessageYou,fromYou;
         RelativeLayout parentLayout;   //layout of each induvidual units of the list
 
         public ViewHolder(View itemView) {
             super(itemView);
-            fromAddress = itemView.findViewById(R.id.from);
-            mMessage = itemView.findViewById(R.id.disp_msg);
+            fromFriend = itemView.findViewById(R.id.fromfriend);
+            mMessageFriend = itemView.findViewById(R.id.disp_msg_friend);
+            fromYou = itemView.findViewById(R.id.fromyou);
+            mMessageYou = itemView.findViewById(R.id.disp_msg_you);
             parentLayout = itemView.findViewById(R.id.layout_list_messages);
         }
     }

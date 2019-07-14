@@ -57,7 +57,16 @@ public class ChatWindow extends AppCompatActivity {
         RecyclerViewAdapter_Chat adapter = new RecyclerViewAdapter_Chat(this, allMessages);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+//        ((LinearLayoutManager)recyclerView.getLayoutManager().setStackFromEnd(true));
+//        recyclerView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+//            @Override
+//            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+//                recyclerView.scrollToPosition();
+//            }
+//        });
     }
+
 
     public void SendMessage(View view){
 
