@@ -39,4 +39,9 @@
         android:background="@drawable/recyclerlist_item_bg"
         android:textColor="#008577"/>
 
+    <TextView
+        android:layout_width="370dp"
+        android:layout_height="700dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/recyclerlist_item_bg"/>
 </RelativeLayout>
