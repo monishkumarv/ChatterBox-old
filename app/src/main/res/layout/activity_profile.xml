@@ -15,7 +15,8 @@
         android:hint="Enter Your Name"
         android:gravity="center"
         android:layout_centerHorizontal="true"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        />
 
     <Button
         android:id="@+id/button3"
@@ -23,8 +24,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="214dp"
         android:layout_centerHorizontal="true"
-        android:text="Done"
-        android:onClick="UpdateName"/>
+        android:text="    Done    "
+        android:onClick="UpdateName"
+        android:background="@drawable/recyclerlist_item_bg"
+        android:textColor="#008577"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -32,6 +35,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="320dp"
         android:onClick="signOut"
-        android:text="Sign out" />
+        android:text="    Sign out    "
+        android:background="@drawable/recyclerlist_item_bg"
+        android:textColor="#008577"/>
 
 </RelativeLayout>

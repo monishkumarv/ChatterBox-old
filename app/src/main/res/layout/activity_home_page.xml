@@ -8,8 +8,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_friends"
-        android:layout_width="409dp"
-        android:layout_height="596dp"
+        android:layout_width="match_parent"
+        android:layout_height="690dp"
         android:layout_below="@+id/relativelayout1234"
         android:layout_marginTop="25dp"
         android:layout_marginBottom="25dp"
@@ -20,33 +20,33 @@
     <RelativeLayout
         android:id="@+id/relativelayout1234"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/add_friend"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="60dp"
-            android:onClick="AddFriend"
-            android:text="ADD FRIEND"
-            tools:text="add friend" />
+        android:layout_height="70dp">
 
         <EditText
             android:id="@+id/friend_phoneNo"
-            android:layout_width="202dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
+            android:layout_marginLeft="55dp"
+            android:layout_centerVertical="true"
             android:ems="10"
-            android:gravity="center"
             android:inputType="phone"
             android:text="+91"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
+        <Button
+            android:id="@+id/add_friend"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/friend_phoneNo"
+            android:layout_marginLeft="40dp"
+            android:onClick="AddFriend"
+            android:text="ADD FRIEND"
+            tools:text="add friend"
+            android:background="@drawable/recyclerlist_item_bg"
+            android:textColor="#008577"/>
 
 
     </RelativeLayout>

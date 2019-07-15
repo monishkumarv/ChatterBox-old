@@ -35,7 +35,9 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="300dp"
-        android:text=" Send OTP " />
+        android:text="    Send OTP    "
+        android:background="@drawable/recyclerlist_item_bg"
+        android:textColor="#008577"/>
 
     <Button
         android:id="@+id/submit_otp"
@@ -44,8 +46,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="300dp"
         android:inputType="phone"
-        android:text=" Submit OTP "
-        android:visibility="invisible"/>
+        android:text="    Submit OTP    "
+        android:visibility="invisible"
+        android:background="@drawable/recyclerlist_item_bg"
+        android:textColor="#008577"/>
 
 
 </RelativeLayout>
