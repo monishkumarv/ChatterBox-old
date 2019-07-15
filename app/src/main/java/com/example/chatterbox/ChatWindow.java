@@ -48,7 +48,6 @@ public class ChatWindow extends AppCompatActivity {
 
         RetrieveMessages(myPhoneNo,friendPhoneNo,myDisplayMessages,true);
         RetrieveMessages(friendPhoneNo,myPhoneNo,friendDisplayMessages,true);
-        callRecyclerView(myDisplayMessages);
 
     }
 
@@ -79,6 +78,9 @@ public class ChatWindow extends AppCompatActivity {
         mdatabaseReference.child(myPhoneNo).child("messages").child(friendPhoneNo).setValue(myDisplayMessages);
         mdatabaseReference.child(friendPhoneNo).child("messages").child(myPhoneNo).setValue(friendDisplayMessages);  //update friend's data
         callRecyclerView(myDisplayMessages);
+
+        // Setting message status as unread for ur friend
+        mdatabaseReference.child(friendPhoneNo).child("unreadmessages").child(myPhoneNo).setValue("true");
     }
 
     public void RetrieveMessages(String parentNumber, String childNumber, final ArrayList<Messages> messagelist, final Boolean CALL_RECYCLERVIEW){

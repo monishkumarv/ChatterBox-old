@@ -13,8 +13,19 @@
         android:text="Loading..."
         android:id="@+id/phone_no"
         android:textColor="#000"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="30dp"
         android:textSize="17sp"/>
+
+    <TextView
+        android:id="@+id/unread_messages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:text="You have some unread messages"
+        android:textColor="#009688"
+        android:textSize="17sp"
+        android:visibility="invisible" />
 
 </RelativeLayout>

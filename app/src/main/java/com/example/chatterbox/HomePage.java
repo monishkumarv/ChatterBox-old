@@ -50,14 +50,17 @@ public class HomePage extends AppCompatActivity {
         mfirebaseDatabase = FirebaseDatabase.getInstance();
         mdatabaseReference = mfirebaseDatabase.getReference().child("User Data");
 
+
         RetrieveFriends();
         callRecyclerView();
     }
 
 
     private void callRecyclerView(){
+        Toast.makeText(HomePage.this, "calling recyclerview...", Toast.LENGTH_SHORT).show();
+
         RecyclerView recyclerView = findViewById(R.id.recycler_view_friends);
-        RecyclerViewAdapter_Friends adapter = new RecyclerViewAdapter_Friends(this, this.friendslist);
+        RecyclerViewAdapter_Friends adapter = new RecyclerViewAdapter_Friends(this, this.friendslist,myPhoneNo);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -76,7 +79,6 @@ public class HomePage extends AppCompatActivity {
     }
 
     public void RetrieveFriends(){
-//        Toast.makeText(HomePage.this,"Searching 4ur friends...",Toast.LENGTH_LONG).show();
         Log.d(TAG,"Retrieving process started");
 
         DatabaseReference newReference = mdatabaseReference.child(myPhoneNo).child("friends");
@@ -109,6 +111,8 @@ public class HomePage extends AppCompatActivity {
 
     }
 
+
+    /** Action Bar...**/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater mf = getMenuInflater();
@@ -132,5 +136,12 @@ public class HomePage extends AppCompatActivity {
 
 
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
+        finish();
+
     }
 }

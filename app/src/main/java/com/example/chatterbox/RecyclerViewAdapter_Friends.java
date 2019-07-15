@@ -28,11 +28,12 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
 
     private ArrayList<String> mFriendslist = new ArrayList<>();
     private Context mContext;
-    public String name;
+    public String name,myPhoneNo;
 
-    public RecyclerViewAdapter_Friends(Context context, ArrayList<String> friendslist) {
+    public RecyclerViewAdapter_Friends(Context context, ArrayList<String> friendslist, String phoneNo) {
         mFriendslist = friendslist;
         mContext = context;
+        myPhoneNo = phoneNo;
     }
 
     @Override
@@ -42,24 +43,60 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
         return holder;
     }
 
+
+    public String checkunreadstatus;
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        Log.d(TAG, "onBindViewHolder: called.");
-
+        Log.d(TAG, "onBindViewHolder: called...............");
         setName(mFriendslist.get(position),holder);
 
-        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+        FirebaseDatabase mfirebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference mdatabaseReference = mfirebaseDatabase.getReference().child("User Data")
+                                                                               .child(myPhoneNo)
+                                                                               .child("unreadmessages")
+                                                                               .child(mFriendslist.get(position));
+        mdatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-                Log.d(TAG, "onClick: clicked on:  " + mFriendslist.get(position));
-                Toast.makeText(mContext, mFriendslist.get(position), Toast.LENGTH_SHORT).show();
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                Intent intent = new Intent(mContext, ChatWindow.class);
-                intent.putExtra("FRIEND_PHONENO", mFriendslist.get(position));
-                mContext.startActivity(intent);
+                if (dataSnapshot.exists())
+                {
+                    checkunreadstatus = dataSnapshot.getValue().toString();
+                    Log.d(TAG, mFriendslist.get(position) + " -status- " + checkunreadstatus );
+
+                    if(checkunreadstatus.equals("true")){
+                        Log.d(TAG, "Visible");
+                        holder.unreadMessages.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        Log.d(TAG, "Invisible");
+                        holder.unreadMessages.setVisibility(View.INVISIBLE);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(TAG, "error:" + databaseError);
 
             }
+        });
+
+
+
+        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Log.d(TAG, "onClick: clicked on:  " + mFriendslist.get(position));
+
+            mdatabaseReference.setValue("false");
+            holder.unreadMessages.setVisibility(View.INVISIBLE);
+            Intent intent = new Intent(mContext, ChatWindow.class);
+            intent.putExtra("FRIEND_PHONENO", mFriendslist.get(position));
+            mContext.startActivity(intent);
+
+        }
         });
     }
 
@@ -71,12 +108,13 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView mPhoneNo;
+        TextView mPhoneNo,unreadMessages;
         RelativeLayout parentLayout;   //layout of each induvidual units of the list
 
         public ViewHolder(View itemView) {
             super(itemView);
             mPhoneNo = itemView.findViewById(R.id.phone_no);
+            unreadMessages = itemView.findViewById(R.id.unread_messages);
             parentLayout = itemView.findViewById(R.id.layout_list_friends);
         }
     }
