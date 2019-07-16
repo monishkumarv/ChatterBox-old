@@ -3,10 +3,12 @@ package com.example.chatterbox;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -17,10 +19,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class ProfileActivity extends AppCompatActivity {
+import de.hdodenhof.circleimageview.CircleImageView;
 
-    public EditText name;
+public class ProfileActivity extends Activity {
+
+    public EditText name,dob,email,gender;
     public String phoneno;
+    CircleImageView profilepic;
     private String TAG = "ProfileActivityLog";
 
     @Override
@@ -29,25 +34,34 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         name = findViewById(R.id.name);
+        dob = findViewById(R.id.dob);
+        email = findViewById(R.id.email_id);
+        gender = findViewById(R.id.male_female);
+        profilepic = findViewById(R.id.profile_pic);
+
         Intent i = getIntent();
         phoneno = i.getStringExtra("PhoneNo");
-
-        setName();
+        setDetails();
 
     }
 
-    public void UpdateName(View v){
+    public void ChangeProfilePic(View view){}
+
+    public void UpdateDetails(View v){
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference().child("User Data");
         reference.child(phoneno).child("Name").setValue(name.getText().toString());
+        reference.child(phoneno).child("DOB").setValue(dob.getText().toString());
+        reference.child(phoneno).child("Email").setValue(email.getText().toString());
+        reference.child(phoneno).child("Gender").setValue(gender.getText().toString());
 
         Intent intent = new Intent(ProfileActivity.this, HomePage.class);
         startActivity(intent);
 
     }
 
-    public void setName() {
+    public void setDetails() {
 
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mReference = mDatabase.getReference().child("User Data").child(phoneno);
@@ -57,10 +71,13 @@ public class ProfileActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.child("Name").exists())
-                {
-                    name.setText(dataSnapshot.child("Name").getValue().toString());
-
-                }
+                { name.setText(dataSnapshot.child("Name").getValue().toString()); }
+                if (dataSnapshot.child("DOB").exists())
+                { dob.setText(dataSnapshot.child("DOB").getValue().toString()); }
+                if (dataSnapshot.child("Email").exists())
+                { email.setText(dataSnapshot.child("Email").getValue().toString()); }
+                if (dataSnapshot.child("Gender").exists())
+                { gender.setText(dataSnapshot.child("Gender").getValue().toString()); }
             }
 
             @Override
@@ -70,13 +87,6 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-    public void signOut(View view){
-        FirebaseAuth.getInstance().signOut();
-        Toast.makeText(ProfileActivity.this,"Signout Successfull",Toast.LENGTH_LONG).show();
-        Intent i = new Intent(ProfileActivity.this,MainActivity.class);
-        startActivity(i);
-
-    }
 
 
 }

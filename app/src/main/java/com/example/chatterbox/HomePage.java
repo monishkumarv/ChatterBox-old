@@ -22,7 +22,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class HomePage extends AppCompatActivity {
 
@@ -67,13 +69,21 @@ public class HomePage extends AppCompatActivity {
 
     public void AddFriend (View view){
 
-
+        String currentDate = DateFormat.getDateInstance().format(new Date());
+        String currentTime = DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date());
         EditText new_friend = findViewById(R.id.friend_phoneNo);
 
+        // updating Friends List
         friendslist.add(new_friend.getText().toString());
-        new_friend.setText("+91");
         mdatabaseReference.child(myPhoneNo).child("friends").setValue(friendslist);
 
+        // Updating Date and Time of last encounter
+        mdatabaseReference.child(myPhoneNo).child("date_time").child(new_friend.getText().toString()).child("date").setValue(currentDate);
+        mdatabaseReference.child(myPhoneNo).child("date_time").child(new_friend.getText().toString()).child("time").setValue(currentTime);
+        mdatabaseReference.child(new_friend.getText().toString()).child("date_time").child(myPhoneNo).child("date").setValue(currentDate);
+        mdatabaseReference.child(new_friend.getText().toString()).child("date_time").child(myPhoneNo).child("time").setValue(currentTime);
+
+        new_friend.setText("+91");
         callRecyclerView();
 
     }
@@ -123,19 +133,25 @@ public class HomePage extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
 
+            case R.id.sign_out:
+                signOut();break;
+
             case R.id.my_profile:
                 Intent intent = new Intent(HomePage.this, ProfileActivity.class);
                 intent.putExtra("PhoneNo", myPhoneNo);
-                startActivity(intent);
+                startActivity(intent);break;
 
             case R.id.settings_id:
                 Toast.makeText(getApplicationContext(),"Settings icon is selected",Toast.LENGTH_SHORT).show();
+                break;
+
             default:
                 return super.onOptionsItemSelected(item);
 
 
 
         }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -144,4 +160,12 @@ public class HomePage extends AppCompatActivity {
         finish();
 
     }
+    public void signOut(){
+        FirebaseAuth.getInstance().signOut();
+        Toast.makeText(HomePage.this,"Signout Successfull",Toast.LENGTH_LONG).show();
+        Intent i = new Intent(HomePage.this,MainActivity.class);
+        startActivity(i);
+
+    }
+
 }

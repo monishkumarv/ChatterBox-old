@@ -5,10 +5,13 @@ import android.content.Intent;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,7 +22,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerViewAdapter_Friends.ViewHolder>{
@@ -50,12 +55,13 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
 
         Log.d(TAG, "onBindViewHolder: called...............");
         setName(mFriendslist.get(position),holder);
+        setDateTime(mFriendslist.get(position),holder);
 
         FirebaseDatabase mfirebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mdatabaseReference = mfirebaseDatabase.getReference().child("User Data")
-                                                                               .child(myPhoneNo)
-                                                                               .child("unreadmessages")
-                                                                               .child(mFriendslist.get(position));
+                .child(myPhoneNo)
+                .child("unreadmessages")
+                .child(mFriendslist.get(position));
         mdatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -63,11 +69,11 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
                 if (dataSnapshot.exists())
                 {
                     checkunreadstatus = dataSnapshot.getValue().toString();
-                    Log.d(TAG, mFriendslist.get(position) + " -status- " + checkunreadstatus );
 
                     if(checkunreadstatus.equals("true")){
                         Log.d(TAG, "Visible");
                         holder.unreadMessages.setVisibility(View.VISIBLE);
+                        holder.date.setTextColor(Color.parseColor("#2125FF"));
                     }
                     else {
                         Log.d(TAG, "Invisible");
@@ -86,17 +92,19 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
 
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Log.d(TAG, "onClick: clicked on:  " + mFriendslist.get(position));
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: clicked on:  " + mFriendslist.get(position));
 
-            mdatabaseReference.setValue("false");
-            holder.unreadMessages.setVisibility(View.INVISIBLE);
-            Intent intent = new Intent(mContext, ChatWindow.class);
-            intent.putExtra("FRIEND_PHONENO", mFriendslist.get(position));
-            mContext.startActivity(intent);
+                mdatabaseReference.setValue("false");
+                holder.unreadMessages.setVisibility(View.INVISIBLE);
+                holder.date.setTextColor(Color.parseColor("#FFFFFF"));
 
-        }
+                Intent intent = new Intent(mContext, ChatWindow.class);
+                intent.putExtra("FRIEND_PHONENO", mFriendslist.get(position));
+                mContext.startActivity(intent);
+
+            }
         });
     }
 
@@ -108,13 +116,15 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView mPhoneNo,unreadMessages;
+        TextView mPhoneNo,date;
+        ImageView unreadMessages;
         RelativeLayout parentLayout;   //layout of each induvidual units of the list
 
         public ViewHolder(View itemView) {
             super(itemView);
             mPhoneNo = itemView.findViewById(R.id.phone_no);
             unreadMessages = itemView.findViewById(R.id.unread_messages);
+            date = itemView.findViewById(R.id.msg_date);
             parentLayout = itemView.findViewById(R.id.layout_list_friends);
         }
     }
@@ -134,12 +144,41 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
                     holder.mPhoneNo.setText(name);    // Updating RecyclerView with ProfileName(instead of phoneNo)
 
                 }else
-                    {
+                {
                     holder.mPhoneNo.setText(phoneNo);  // If profile is not created already
 
                 }
 
-//                Log.d(TAG,name);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(TAG,"error:" + databaseError);
+            }
+        });
+    }
+
+    public void setDateTime(String phoneNo,ViewHolder holder){
+
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference mReference = mDatabase.getReference().child("User Data")
+                                                               .child(myPhoneNo)
+                                                               .child("date_time")
+                                                               .child(phoneNo);
+
+        mReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                String todaysdate = DateFormat.getDateInstance().format(new Date());
+
+                if (todaysdate.equals(dataSnapshot.child("date").getValue().toString())){
+                    holder.date.setText(dataSnapshot.child("time").getValue().toString());
+                }else {
+                    holder.date.setText(dataSnapshot.child("date").getValue().toString());
+                }
+
+
             }
 
             @Override
@@ -149,4 +188,3 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
         });
     }
 }
-

@@ -18,7 +18,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ChatWindow extends AppCompatActivity {
 
@@ -81,6 +83,15 @@ public class ChatWindow extends AppCompatActivity {
 
         // Setting message status as unread for ur friend
         mdatabaseReference.child(friendPhoneNo).child("unreadmessages").child(myPhoneNo).setValue("true");
+
+        // Date & Time of Last Message
+        String currentDate = DateFormat.getDateInstance().format(new Date());
+        String currentTime = DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date());
+        mdatabaseReference.child(myPhoneNo).child("date_time").child(friendPhoneNo).child("date").setValue(currentDate);
+        mdatabaseReference.child(myPhoneNo).child("date_time").child(friendPhoneNo).child("time").setValue(currentTime);
+        mdatabaseReference.child(friendPhoneNo).child("date_time").child(myPhoneNo).child("date").setValue(currentDate);
+        mdatabaseReference.child(friendPhoneNo).child("date_time").child(myPhoneNo).child("time").setValue(currentTime);
+
     }
 
     public void RetrieveMessages(String parentNumber, String childNumber, final ArrayList<Messages> messagelist, final Boolean CALL_RECYCLERVIEW){

@@ -17,38 +17,44 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/recyclerlist_item_bg"/>
+        android:background="@drawable/edittext3"
+        android:paddingTop="15dp"/>
 
     <RelativeLayout
         android:id="@+id/relativelayout1234"
         android:layout_width="match_parent"
-        android:layout_height="70dp">
+        android:layout_height="50dp"
+        android:gravity="center">
 
         <EditText
             android:id="@+id/friend_phoneNo"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="55dp"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:ems="10"
             android:inputType="phone"
             android:text="+91"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="#FFFF"
+            android:background="@drawable/edittext3"/>
 
-        <Button
+        <TextView
             android:id="@+id/add_friend"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
             android:layout_centerVertical="true"
+            android:paddingHorizontal="17dp"
+            android:gravity="center"
             android:layout_toRightOf="@+id/friend_phoneNo"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="30dp"
             android:onClick="AddFriend"
-            android:text="ADD FRIEND"
-            tools:text="add friend"
+            android:text="Add Friend"
+            android:textSize="15dp"
             android:background="@drawable/recyclerlist_item_bg"
-            android:textColor="#008577"/>
+            android:textColor="@color/colorPrimary"/>
 
 
     </RelativeLayout>

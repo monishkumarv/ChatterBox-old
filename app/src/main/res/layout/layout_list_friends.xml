@@ -2,38 +2,59 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="15dp"
+    android:paddingHorizontal="15dp"
     android:id="@+id/layout_list_friends">
 
-
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:id="@+id/friend_profile_pic"
+        android:src="@mipmap/ic_launcher"
+        android:onClick="ChangeProfilePic"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/friend_profile_pic"
         android:text="Loading..."
         android:id="@+id/phone_no"
         android:textColor="#000"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="30dp"
         android:textSize="17sp"/>
 
-    <TextView
+    <ImageView
         android:id="@+id/unread_messages"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
-        android:text="You have some unread messages"
-        android:textColor="#009688"
-        android:textSize="17sp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/friend_profile_pic"
+        android:layout_marginLeft="250dp"
+        android:src="@drawable/ic_message_black_24dp"
         android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/msg_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/profile_pic"
+        android:layout_marginLeft="230dp"
+        android:layout_centerVertical="true"
+        android:textColor="#FFF"
+        android:textSize="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/friend_profile_pic"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="40dp"
-        android:text="__________________________________________________"
+        android:textColor="#000"
+        android:text="_________________________________________"
          />
+
+
 
 </RelativeLayout>
