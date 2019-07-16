@@ -56,6 +56,7 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
         Log.d(TAG, "onBindViewHolder: called...............");
         setName(mFriendslist.get(position),holder);
         setDateTime(mFriendslist.get(position),holder);
+        setLastMsg(mFriendslist.get(position),holder);
 
         FirebaseDatabase mfirebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mdatabaseReference = mfirebaseDatabase.getReference().child("User Data")
@@ -71,13 +72,14 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
                     checkunreadstatus = dataSnapshot.getValue().toString();
 
                     if(checkunreadstatus.equals("true")){
-                        Log.d(TAG, "Visible");
-                        holder.unreadMessages.setVisibility(View.VISIBLE);
+                        Log.d(TAG, "Not Read");
+                        holder.previousMessage.setTextColor(Color.parseColor("#2125FF"));
                         holder.date.setTextColor(Color.parseColor("#2125FF"));
                     }
                     else {
-                        Log.d(TAG, "Invisible");
-                        holder.unreadMessages.setVisibility(View.INVISIBLE);
+                        Log.d(TAG, "Read");
+                        holder.previousMessage.setTextColor(Color.parseColor("#808080"));
+                        holder.date.setTextColor(Color.parseColor("#808080"));
                     }
                 }
             }
@@ -97,8 +99,8 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
                 Log.d(TAG, "onClick: clicked on:  " + mFriendslist.get(position));
 
                 mdatabaseReference.setValue("false");
-                holder.unreadMessages.setVisibility(View.INVISIBLE);
-                holder.date.setTextColor(Color.parseColor("#FFFFFF"));
+                holder.previousMessage.setTextColor(Color.parseColor("#808080"));
+                holder.date.setTextColor(Color.parseColor("#808080"));
 
                 Intent intent = new Intent(mContext, ChatWindow.class);
                 intent.putExtra("FRIEND_PHONENO", mFriendslist.get(position));
@@ -116,14 +118,13 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView mPhoneNo,date;
-        ImageView unreadMessages;
+        TextView mPhoneNo,date,previousMessage;
         RelativeLayout parentLayout;   //layout of each induvidual units of the list
 
         public ViewHolder(View itemView) {
             super(itemView);
             mPhoneNo = itemView.findViewById(R.id.phone_no);
-            unreadMessages = itemView.findViewById(R.id.unread_messages);
+            previousMessage = itemView.findViewById(R.id.previous_message);
             date = itemView.findViewById(R.id.msg_date);
             parentLayout = itemView.findViewById(R.id.layout_list_friends);
         }
@@ -162,9 +163,9 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
 
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mReference = mDatabase.getReference().child("User Data")
-                                                               .child(myPhoneNo)
-                                                               .child("date_time")
-                                                               .child(phoneNo);
+                .child(myPhoneNo)
+                .child("date_time")
+                .child(phoneNo);
 
         mReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -179,6 +180,35 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
                 }
 
 
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(TAG,"error:" + databaseError);
+            }
+        });
+    }
+
+    public void setLastMsg(String phoneNo,ViewHolder holder){
+
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference mReference = mDatabase.getReference().child("User Data")
+                .child(myPhoneNo)
+                .child("lastmessage")
+                .child(phoneNo);
+
+        mReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.exists()) {
+                    name = dataSnapshot.getValue().toString();
+                    holder.previousMessage.setText(name);
+
+                } else {
+                    holder.previousMessage.setText(" ");
+
+                }
             }
 
             @Override

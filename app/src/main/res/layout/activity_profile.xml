@@ -18,14 +18,14 @@
         <TextView
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:text="Name : "
+            android:text="Name"
             android:textColor="#E91E63"
             android:textSize="20dp" />
 
         <EditText
             android:id="@+id/name"
             android:layout_width="200dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:background="@drawable/edittext2"
             android:gravity="center"
             android:hint="  Enter Your Name  "
@@ -45,14 +45,14 @@
         <TextView
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:text="Birthday : "
+            android:text="Birthday"
             android:textColor="#E91E63"
             android:textSize="20dp" />
 
         <EditText
             android:id="@+id/dob"
             android:layout_width="200dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/edittext2"
             android:gravity="center"
@@ -72,14 +72,14 @@
         <TextView
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:text="Email : "
+            android:text="Email"
             android:textColor="#E91E63"
             android:textSize="20dp" />
 
         <EditText
             android:id="@+id/email_id"
             android:layout_width="200dp"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/edittext2"
             android:gravity="center"
@@ -99,14 +99,14 @@
         <TextView
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:text="Gender : "
+            android:text="Gender"
             android:textColor="#E91E63"
             android:textSize="20dp" />
 
         <EditText
             android:id="@+id/male_female"
             android:layout_width="200dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/edittext2"
             android:gravity="center"
@@ -135,7 +135,7 @@
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/ic_done_black_24dp"
+        android:src="@drawable/ic_done_all_black_24dp"
         android:layout_marginLeft="350dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="630dp"

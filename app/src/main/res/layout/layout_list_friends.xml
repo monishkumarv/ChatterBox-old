@@ -8,41 +8,39 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="3dp"
         android:id="@+id/friend_profile_pic"
         android:src="@mipmap/ic_launcher"
         android:onClick="ChangeProfilePic"/>
 
     <TextView
+        android:id="@+id/phone_no"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/friend_profile_pic"
         android:text="Loading..."
-        android:id="@+id/phone_no"
         android:textColor="#000"
         android:layout_marginLeft="30dp"
+        android:layout_marginTop="3dp"
         android:textSize="17sp"/>
 
-    <ImageView
-        android:id="@+id/unread_messages"
+    <TextView
+        android:id="@+id/previous_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="27dp"
         android:layout_toRightOf="@+id/friend_profile_pic"
-        android:layout_marginLeft="250dp"
-        android:src="@drawable/ic_message_black_24dp"
-        android:visibility="invisible" />
+        android:layout_marginLeft="30dp"
+        android:textColor="#808080"
+        android:text="Messages loading..." />
 
     <TextView
         android:id="@+id/msg_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_toRightOf="@+id/profile_pic"
-        android:layout_marginLeft="230dp"
-        android:layout_centerVertical="true"
-        android:textColor="#FFF"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="295dp"
+        android:textColor="#808080"
         android:textSize="10dp"/>
 
     <TextView
@@ -50,8 +48,8 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/friend_profile_pic"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="40dp"
-        android:textColor="#000"
+        android:layout_marginTop="43dp"
+        android:textColor="#808080"
         android:text="_________________________________________"
          />
 

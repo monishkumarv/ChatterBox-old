@@ -33,7 +33,7 @@ public class HomePage extends AppCompatActivity {
     private FirebaseDatabase mfirebaseDatabase;
     private DatabaseReference mdatabaseReference;
 
-    String myPhoneNo;
+    String myPhoneNo,friendPhoneNo;
     private ArrayList<String> friendslist = new ArrayList<>();
 
     @Override
@@ -59,7 +59,6 @@ public class HomePage extends AppCompatActivity {
 
 
     private void callRecyclerView(){
-        Toast.makeText(HomePage.this, "calling recyclerview...", Toast.LENGTH_SHORT).show();
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view_friends);
         RecyclerViewAdapter_Friends adapter = new RecyclerViewAdapter_Friends(this, this.friendslist,myPhoneNo);
@@ -69,20 +68,24 @@ public class HomePage extends AppCompatActivity {
 
     public void AddFriend (View view){
 
+
         String currentDate = DateFormat.getDateInstance().format(new Date());
         String currentTime = DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date());
         EditText new_friend = findViewById(R.id.friend_phoneNo);
+        friendPhoneNo = new_friend.getText().toString();
 
-        // updating Friends List
-        friendslist.add(new_friend.getText().toString());
-        mdatabaseReference.child(myPhoneNo).child("friends").setValue(friendslist);
+        if (!checkFriend()){
+            // updating Friends List
+            friendslist.add(friendPhoneNo);
+            mdatabaseReference.child(myPhoneNo).child("friends").setValue(friendslist);
 
-        // Updating Date and Time of last encounter
-        mdatabaseReference.child(myPhoneNo).child("date_time").child(new_friend.getText().toString()).child("date").setValue(currentDate);
-        mdatabaseReference.child(myPhoneNo).child("date_time").child(new_friend.getText().toString()).child("time").setValue(currentTime);
-        mdatabaseReference.child(new_friend.getText().toString()).child("date_time").child(myPhoneNo).child("date").setValue(currentDate);
-        mdatabaseReference.child(new_friend.getText().toString()).child("date_time").child(myPhoneNo).child("time").setValue(currentTime);
+            // Updating Date and Time of last encounter
+            mdatabaseReference.child(myPhoneNo).child("date_time").child(friendPhoneNo).child("date").setValue(currentDate);
+            mdatabaseReference.child(myPhoneNo).child("date_time").child(friendPhoneNo).child("time").setValue(currentTime);
+            mdatabaseReference.child(friendPhoneNo).child("date_time").child(myPhoneNo).child("date").setValue(currentDate);
+            mdatabaseReference.child(friendPhoneNo).child("date_time").child(myPhoneNo).child("time").setValue(currentTime);
 
+        }
         new_friend.setText("+91");
         callRecyclerView();
 
@@ -119,6 +122,17 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
+    }
+
+    public boolean checkFriend(){
+
+        for (int i = 0; i <friendslist.size() ; i++) {
+            if (friendslist.get(i).equals(friendPhoneNo)){
+                Toast.makeText(HomePage.this,"You are already friends",Toast.LENGTH_LONG).show();
+                return true;
+            }
+        }
+        return false;
     }
 
 
