@@ -50,6 +50,7 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
 
 
     public String checkunreadstatus;
+    public Boolean NameExists;
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
@@ -103,7 +104,13 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
                 holder.date.setTextColor(Color.parseColor("#808080"));
 
                 Intent intent = new Intent(mContext, ChatWindow.class);
-                intent.putExtra("FRIEND_PHONENO", mFriendslist.get(position));
+                if (NameExists){
+                    intent.putExtra("Title", holder.mPhoneNo.getText());
+                    intent.putExtra("FRIEND_PHONENO", mFriendslist.get(position));
+
+                }else {
+                    intent.putExtra("FRIEND_PHONENO", mFriendslist.get(position));
+                }
                 mContext.startActivity(intent);
 
             }
@@ -141,11 +148,13 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
 
                 if (dataSnapshot.child("Name").exists())
                 {
+                    NameExists = true;
                     name =dataSnapshot.child("Name").getValue().toString();
                     holder.mPhoneNo.setText(name);    // Updating RecyclerView with ProfileName(instead of phoneNo)
 
                 }else
                 {
+                    NameExists = true;
                     holder.mPhoneNo.setText(phoneNo);  // If profile is not created already
 
                 }

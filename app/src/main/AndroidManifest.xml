@@ -3,22 +3,28 @@
     package="com.example.chatterbox">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.STORAGE" />
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_message_24dp"
+        android:icon="@drawable/ic_message_black_24dp"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/ic_message_24dp"
+        android:roundIcon="@drawable/ic_message_black_24dp"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ProfileActivity"
-            android:theme="@style/hidetitlebar"></activity>
+        <activity android:name=".UploadImageActivity" />
+        <activity
+            android:name=".ProfileActivity"
+            android:theme="@style/hidetitlebar"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ChatWindow"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".HomePage"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -26,8 +32,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
-            android:theme="@style/hidetitlebar">
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/hidetitlebar"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

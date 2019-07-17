@@ -25,7 +25,7 @@ import java.util.Date;
 public class ChatWindow extends AppCompatActivity {
 
     private static final String TAG = "ChatWindowLog";
-    String friendPhoneNo,newmsg, myPhoneNo;
+    String friendPhoneNo,newmsg, myPhoneNo,name;
     ArrayList<Messages> myDisplayMessages = new ArrayList<>();
     ArrayList<Messages> friendDisplayMessages = new ArrayList<>();
     public FirebaseAuth mAuth;
@@ -41,13 +41,18 @@ public class ChatWindow extends AppCompatActivity {
         myPhoneNo = mAuth.getCurrentUser().getPhoneNumber();
         Intent i = getIntent();
         friendPhoneNo = i.getStringExtra("FRIEND_PHONENO");
+        name = i.getStringExtra("Title");
 
+        // Getting Firebase Reference
         mfirebaseDatabase = FirebaseDatabase.getInstance();
         mdatabaseReference = mfirebaseDatabase.getReference().child("User Data");
 
+        // Setting Title
         TextView Title = findViewById(R.id.title_phoneNo);
         Title.setText(friendPhoneNo);
+        if (name!=null){Title.setText(name);}
 
+        // Getting Old Messages
         RetrieveMessages(myPhoneNo,friendPhoneNo,myDisplayMessages,true);
         RetrieveMessages(friendPhoneNo,myPhoneNo,friendDisplayMessages,true);
 
@@ -55,9 +60,16 @@ public class ChatWindow extends AppCompatActivity {
 
     private void callRecyclerView(ArrayList<Messages> allMessages){
         RecyclerView recyclerView = findViewById(R.id.chat_recycler_view);
+        LinearLayoutManager mlayoutmanager = new LinearLayoutManager(this);
+
         RecyclerViewAdapter_Chat adapter = new RecyclerViewAdapter_Chat(this, allMessages);
+        if (recyclerView.getChildCount()== allMessages.size()){
+            mlayoutmanager.setStackFromEnd(true);
+        }else {
+            mlayoutmanager.setStackFromEnd(false);
+        }
+        recyclerView.setLayoutManager(mlayoutmanager);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
     }
 

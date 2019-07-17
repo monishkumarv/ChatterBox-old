@@ -52,18 +52,26 @@ public class HomePage extends AppCompatActivity {
         mfirebaseDatabase = FirebaseDatabase.getInstance();
         mdatabaseReference = mfirebaseDatabase.getReference().child("User Data");
 
-
         RetrieveFriends();
         callRecyclerView();
     }
 
 
-    private void callRecyclerView(){
+    public void callRecyclerView(){
+
+        Log.d(TAG,"called...");
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view_friends);
+        recyclerView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                recyclerView.scrollToPosition(friendslist.size() - 1);
+            }
+        });
         RecyclerViewAdapter_Friends adapter = new RecyclerViewAdapter_Friends(this, this.friendslist,myPhoneNo);
-        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+
     }
 
     public void AddFriend (View view){
@@ -85,9 +93,9 @@ public class HomePage extends AppCompatActivity {
             mdatabaseReference.child(friendPhoneNo).child("date_time").child(myPhoneNo).child("date").setValue(currentDate);
             mdatabaseReference.child(friendPhoneNo).child("date_time").child(myPhoneNo).child("time").setValue(currentTime);
 
-        }
-        new_friend.setText("+91");
-        callRecyclerView();
+            callRecyclerView();
+
+        } new_friend.setText("+91");
 
     }
 
@@ -135,7 +143,6 @@ public class HomePage extends AppCompatActivity {
         return false;
     }
 
-
     /** Action Bar...**/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -157,6 +164,7 @@ public class HomePage extends AppCompatActivity {
 
             case R.id.settings_id:
                 Toast.makeText(getApplicationContext(),"Settings icon is selected",Toast.LENGTH_SHORT).show();
+                callRecyclerView();
                 break;
 
             default:

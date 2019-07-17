@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="245dp"
         android:gravity="center_horizontal"
         android:padding="40dp">
 
@@ -31,14 +31,15 @@
             android:hint="  Enter Your Name  "
             android:inputType="textPersonName"
             android:textColor="#FFFF"
-            android:textSize="15dp" />
+            android:textSize="15dp"
+            android:focusable="auto"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="325dp"
+        android:layout_marginTop="320dp"
         android:gravity="center_horizontal"
         android:padding="40dp">
 
@@ -65,7 +66,35 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="395dp"
+        android:gravity="center_horizontal"
+        android:padding="40dp">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Phone"
+            android:textColor="#E91E63"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/number"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/edittext2"
+            android:gravity="center"
+            android:hint="Phone No."
+            android:inputType="date"
+            android:textColor="#FFFFFF"
+            android:textSize="15dp"
+            android:focusable="false"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="470dp"
         android:gravity="center_horizontal"
         android:padding="40dp">
 
@@ -92,7 +121,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="475dp"
+        android:layout_marginTop="545dp"
         android:gravity="center_horizontal"
         android:padding="40dp">
 
@@ -138,7 +167,25 @@
         android:src="@drawable/ic_done_all_black_24dp"
         android:layout_marginLeft="350dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="630dp"
+        android:layout_marginTop="660dp"
         android:onClick="UpdateDetails"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="230dp"
+        android:gravity="center_horizontal"
+        android:text="______________________________________"
+        android:textSize="20dp"
+        android:textColor="#E91E63"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="660dp"
+        android:gravity="center_horizontal"
+        android:text="_____________                   ______________"
+        android:textSize="20dp"
+        android:textColor="#E91E63"/>
 
 </RelativeLayout>

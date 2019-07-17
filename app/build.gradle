@@ -45,10 +45,17 @@ dependencies {
     // Firebase Database
     implementation 'com.google.firebase:firebase-database:17.0.0'
 
+    // Firebase Storage
+    implementation 'com.google.firebase:firebase-storage:17.0.0'
+
     // Rrecyclerview
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
 
     //circle imageview
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.4.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.4.0'
 
 }

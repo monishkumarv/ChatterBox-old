@@ -23,7 +23,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends Activity {
 
-    public EditText name,dob,email,gender;
+    public EditText name,dob,phone,email,gender;
     public String phoneno;
     CircleImageView profilepic;
     private String TAG = "ProfileActivityLog";
@@ -38,14 +38,22 @@ public class ProfileActivity extends Activity {
         email = findViewById(R.id.email_id);
         gender = findViewById(R.id.male_female);
         profilepic = findViewById(R.id.profile_pic);
+        phone = findViewById(R.id.number);
 
         Intent i = getIntent();
         phoneno = i.getStringExtra("PhoneNo");
+        phone.setText(phoneno);
         setDetails();
 
     }
 
-    public void ChangeProfilePic(View view){}
+    public void ChangeProfilePic(View view){
+        Intent intent = new Intent(ProfileActivity.this,UploadImageActivity.class);
+        intent.putExtra("MyPhoneNo", phoneno);
+        startActivity(intent);
+        Toast.makeText(ProfileActivity.this,"Profile Pic Updated",Toast.LENGTH_SHORT).show();
+
+    }
 
     public void UpdateDetails(View v){
 
