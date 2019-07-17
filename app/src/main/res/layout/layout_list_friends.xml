@@ -21,7 +21,7 @@
         android:layout_toRightOf="@+id/friend_profile_pic"
         android:text="Loading..."
         android:textColor="#000"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="25dp"
         android:layout_marginTop="3dp"
         android:textSize="17sp"/>
 
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="27dp"
         android:layout_toRightOf="@+id/friend_profile_pic"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="25dp"
         android:textColor="#808080"
         android:text="Messages loading..." />
 
@@ -50,8 +50,8 @@
         android:layout_toRightOf="@+id/friend_profile_pic"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="43dp"
-        android:textColor="#808080"
-        android:text="_________________________________________"
+        android:textColor="#1B808080"
+        android:text="___________________________________________"
          />
 
 
