@@ -24,10 +24,11 @@
         android:paddingVertical="10dp"
         android:paddingHorizontal="20dp"
         android:text="Message"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="5dp"
         android:textColor="#FFF"
         android:textSize="17sp"
-        android:background="@drawable/chat_bubble_violet"/>
+        android:background="@drawable/chat_bubble_green"/>
 
     <TextView
         android:id="@+id/disp_msg_you"
@@ -40,7 +41,7 @@
         android:text="Message"
         android:textColor="#FFF"
         android:textSize="17sp"
-        android:background="@drawable/chat_bubble_violet"/>
+        android:background="@drawable/chat_bubble_blue"/>
 
 
 
