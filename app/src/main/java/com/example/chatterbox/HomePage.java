@@ -44,7 +44,8 @@ public class HomePage extends AppCompatActivity {
         // Action Bar
         ActionBar ab = getSupportActionBar();
         ab.setLogo(R.drawable.ic_launcher_foreground);
-        ab.setDisplayUseLogoEnabled(true);
+        ab.setDisplayUseLogoEnabled(false);
+        ab.setLogo(R.drawable.ic_message_24dp);
         ab.setDisplayShowHomeEnabled(true);
 
         mAuth = FirebaseAuth.getInstance();

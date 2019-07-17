@@ -2,6 +2,7 @@ package com.example.chatterbox;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,7 +11,16 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class RecyclerViewAdapter_Chat extends RecyclerView.Adapter<RecyclerViewAdapter_Chat.ViewHolder> {
@@ -19,10 +29,12 @@ public class RecyclerViewAdapter_Chat extends RecyclerView.Adapter<RecyclerViewA
 
     private ArrayList<Messages> mMessageList = new ArrayList<>();
     private Context mContext;
+    private String friendPhoneNo;
 
-    public RecyclerViewAdapter_Chat(Context context, ArrayList<Messages> displaymessages) {
+    public RecyclerViewAdapter_Chat(Context context, ArrayList<Messages> displaymessages, String phoneno) {
         mMessageList = displaymessages;
         mContext = context;
+        friendPhoneNo = phoneno;
     }
 
     @Override
@@ -38,15 +50,20 @@ public class RecyclerViewAdapter_Chat extends RecyclerView.Adapter<RecyclerViewA
         Log.d(TAG, "onBindViewHolder: called.");
 
         if (mMessageList.get(position).IS_MSG_FROM_YOU) {
-            holder.fromYou.setText("You");
+//            holder.fromYou.setText("You");
             holder.mMessageYou.setText(mMessageList.get(position).message);
-            holder.fromFriend.setText(null);
-            holder.mMessageFriend.setText(null);
+            holder.fromYou.setVisibility(View.VISIBLE);
+            holder.mMessageYou.setVisibility(View.VISIBLE);
+            holder.fromFriend.setVisibility(View.INVISIBLE);
+            holder.mMessageFriend.setVisibility(View.INVISIBLE);
         }else {
-            holder.fromFriend.setText("Friend");
+            SetProfilePic(friendPhoneNo,holder);
+//            holder.fromFriend.setText("Friend");
             holder.mMessageFriend.setText(mMessageList.get(position).message);
-            holder.fromYou.setText(null);
-            holder.mMessageYou.setText(null);
+            holder.fromFriend.setVisibility(View.VISIBLE);
+            holder.mMessageFriend.setVisibility(View.VISIBLE);
+            holder.fromYou.setVisibility(View.INVISIBLE);
+            holder.mMessageYou.setVisibility(View.INVISIBLE);
         }
         Log.d(TAG, "onBindViewHolder: ended.");
     }
@@ -59,6 +76,7 @@ public class RecyclerViewAdapter_Chat extends RecyclerView.Adapter<RecyclerViewA
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView mMessageFriend,fromFriend,mMessageYou,fromYou;
+        CircleImageView friendprofilepic;
         RelativeLayout parentLayout;   //layout of each induvidual units of the list
 
         public ViewHolder(View itemView) {
@@ -67,9 +85,33 @@ public class RecyclerViewAdapter_Chat extends RecyclerView.Adapter<RecyclerViewA
             mMessageFriend = itemView.findViewById(R.id.disp_msg_friend);
             fromYou = itemView.findViewById(R.id.fromyou);
             mMessageYou = itemView.findViewById(R.id.disp_msg_you);
+            friendprofilepic = itemView.findViewById(R.id.friend_profile_pic);
             parentLayout = itemView.findViewById(R.id.layout_list_messages);
         }
     }
+
+    public void SetProfilePic(String phoneNo, ViewHolder holder) {
+
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference mReference = mDatabase.getReference().child("User Data").child(phoneNo);
+
+        mReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.child("Profile Pic").exists())
+                { Glide.with(mContext).asBitmap()
+                        .load(dataSnapshot.child("Profile Pic").getValue().toString()).into(holder.friendprofilepic); }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(TAG,"error:" + databaseError);
+            }
+        });
+    }
+
 }
 
 

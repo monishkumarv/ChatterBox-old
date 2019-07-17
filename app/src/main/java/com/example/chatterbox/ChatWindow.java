@@ -13,8 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -70,12 +68,8 @@ public class ChatWindow extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.chat_recycler_view);
         LinearLayoutManager mlayoutmanager = new LinearLayoutManager(this);
 
-        RecyclerViewAdapter_Chat adapter = new RecyclerViewAdapter_Chat(this, allMessages);
-        if (recyclerView.getChildCount()== allMessages.size()){
-            mlayoutmanager.setStackFromEnd(true);
-        }else {
-            mlayoutmanager.setStackFromEnd(false);
-        }
+        RecyclerViewAdapter_Chat adapter = new RecyclerViewAdapter_Chat(this, allMessages,friendPhoneNo);
+        mlayoutmanager.setStackFromEnd(true);
         recyclerView.setLayoutManager(mlayoutmanager);
         recyclerView.setAdapter(adapter);
 
