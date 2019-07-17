@@ -73,6 +73,7 @@ public class UploadImageActivity extends AppCompatActivity {
 
                             Toast.makeText(UploadImageActivity.this, "Done"+uri, Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(UploadImageActivity.this,ProfileActivity.class);
+//                            intent.putExtra("DP_URL",uri.toString());
                             startActivity(intent);
                         }
                     });

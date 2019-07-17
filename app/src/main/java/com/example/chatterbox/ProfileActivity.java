@@ -12,6 +12,7 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -44,6 +45,7 @@ public class ProfileActivity extends Activity {
         phoneno = i.getStringExtra("PhoneNo");
         phone.setText(phoneno);
         setDetails();
+
 
     }
 
@@ -86,6 +88,10 @@ public class ProfileActivity extends Activity {
                 { email.setText(dataSnapshot.child("Email").getValue().toString()); }
                 if (dataSnapshot.child("Gender").exists())
                 { gender.setText(dataSnapshot.child("Gender").getValue().toString()); }
+
+                if (dataSnapshot.child("profilepic").exists())
+                { Glide.with(ProfileActivity.this).asBitmap()
+                        .load(dataSnapshot.child("profilepic").getValue().toString()).into(profilepic); }
             }
 
             @Override
