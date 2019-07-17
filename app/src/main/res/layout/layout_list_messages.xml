@@ -2,9 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="15dp"
     android:id="@+id/layout_list_messages"
-    android:gravity="center">
+    android:gravity="center"
+    android:paddingVertical="5dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="20dp"
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="1dp"
+        android:layout_centerVertical="true"
         android:padding="10dp"
         android:text="Message"
         android:textColor="#FFF"
