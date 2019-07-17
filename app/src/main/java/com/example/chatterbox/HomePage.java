@@ -162,6 +162,7 @@ public class HomePage extends AppCompatActivity {
             case R.id.my_profile:
                 Intent intent = new Intent(HomePage.this, ProfileActivity.class);
                 intent.putExtra("PhoneNo", myPhoneNo);
+                intent.putExtra("Editable", true);
                 startActivity(intent);break;
 
             case R.id.refresh_page:

@@ -7,6 +7,11 @@
     tools:context=".ProfileActivity"
     android:background="#FFFF">
 
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:onClick="BackButton"
+        android:src="@drawable/ic_arrow_back_white_24dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,7 +37,7 @@
             android:inputType="textPersonName"
             android:textColor="#FFFF"
             android:textSize="15dp"
-            android:focusable="auto"/>
+            android:focusable="false"/>
 
     </LinearLayout>
 
@@ -60,7 +65,8 @@
             android:hint="DOB"
             android:inputType="date"
             android:textColor="#FFFFFF"
-            android:textSize="15dp" />
+            android:textSize="15dp"
+            android:focusable="false"/>
     </LinearLayout>
 
     <LinearLayout
@@ -115,7 +121,8 @@
             android:hint="  Email ID  "
             android:inputType="textEmailAddress"
             android:textColor="#FFFFFF"
-            android:textSize="15dp" />
+            android:textSize="15dp"
+            android:focusable="false"/>
     </LinearLayout>
 
     <LinearLayout
@@ -142,14 +149,15 @@
             android:hint="  Male/Female  "
             android:inputType="text"
             android:textColor="#FFFFFF"
-            android:textSize="15dp" />
+            android:textSize="15dp"
+            android:focusable="false"/>
     </LinearLayout>
 
     <ImageView
         android:id="@+id/cover_pic"
         android:layout_width="match_parent"
         android:layout_height="170dp"
-        android:background="@drawable/cover"
+        android:src="@drawable/cover"
         android:onClick="ChangeCover"
         android:focusable="false"/>
 
@@ -162,7 +170,7 @@
         android:id="@+id/profile_pic"
         android:src="@drawable/ic_account_circle_pink_24dp"
         android:onClick="ChangeDP"
-        android:clickable="false"/>
+        android:focusable="false"/>
 
     <ImageView
         android:layout_width="50dp"
@@ -190,5 +198,13 @@
         android:text="_____________                   ______________"
         android:textSize="20dp"
         android:textColor="#E91E63"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit"
+        android:textSize="30dp"
+        android:layout_marginTop="200dp"
+        android:onClick="Edit"/>
 
 </RelativeLayout>

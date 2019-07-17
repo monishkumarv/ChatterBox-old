@@ -66,7 +66,7 @@ public class ProfileActivity extends Activity {
         startActivity(intent);
     }
 
-    public void UpdateDetails(View v){
+    public void UpdateDetails(View view){
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference().child("User Data");
@@ -75,9 +75,14 @@ public class ProfileActivity extends Activity {
         reference.child(phoneno).child("Email").setValue(email.getText().toString());
         reference.child(phoneno).child("Gender").setValue(gender.getText().toString());
 
-        Intent intent = new Intent(ProfileActivity.this, HomePage.class);
-        startActivity(intent);
+        Toast.makeText(ProfileActivity.this,"Profile Updated",Toast.LENGTH_SHORT).show();
 
+        coverpic.setFocusable(false);
+        profilepic.setFocusable(false);
+        name.setFocusable(false);
+        dob.setFocusable(false);
+        email.setFocusable(false);
+        gender.setFocusable(false);
     }
 
     public void setDetails() {
@@ -114,6 +119,17 @@ public class ProfileActivity extends Activity {
         });
     }
 
+    public void Edit(View view) {
+        coverpic.setFocusable(true);
+        profilepic.setFocusable(true);
+        name.setFocusable(true);
+        dob.setFocusable(true);
+        email.setFocusable(true);
+        gender.setFocusable(true);
+    }
 
-
+    public void BackButton(View view) {
+        Intent intent = new Intent(ProfileActivity.this, HomePage.class);
+        startActivity(intent);
+    }
 }
