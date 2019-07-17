@@ -10,6 +10,6 @@
 
     <stroke
         android:width="2dp"
-        android:color="#2196F3" />
+        android:color="@color/colorPrimary" />
 
 </shape>
