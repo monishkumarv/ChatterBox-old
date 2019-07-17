@@ -20,7 +20,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:paddingHorizontal="10dp"
@@ -28,8 +28,9 @@
         android:gravity="center">
         <EditText
             android:id="@+id/enter_message"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:layout_width="330dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
             android:paddingHorizontal="13dp"
             android:hint="Type a message"
             android:inputType="textPersonName"
@@ -38,8 +39,9 @@
 
         <ImageView
             android:id="@+id/button"
-            android:layout_width="40dp"
-            android:layout_height="50dp"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
             android:layout_toRightOf="@id/enter_message"
             android:layout_marginLeft="20dp"
             android:onClick="SendMessage"
