@@ -41,7 +41,8 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        ActionBar ab = getSupportActionBar();               // Creating an object in ActionBar
+        // Action Bar
+        ActionBar ab = getSupportActionBar();
         ab.setLogo(R.drawable.ic_launcher_foreground);
         ab.setDisplayUseLogoEnabled(true);
         ab.setDisplayShowHomeEnabled(true);
@@ -147,7 +148,7 @@ public class HomePage extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater mf = getMenuInflater();
-        mf.inflate(R.menu.actionbar_mainmenu,menu);
+        mf.inflate(R.menu.actionbar_homepage,menu);
         return super.onCreateOptionsMenu(menu);
     }
     @Override
@@ -162,8 +163,8 @@ public class HomePage extends AppCompatActivity {
                 intent.putExtra("PhoneNo", myPhoneNo);
                 startActivity(intent);break;
 
-            case R.id.settings_id:
-                Toast.makeText(getApplicationContext(),"Settings icon is selected",Toast.LENGTH_SHORT).show();
+            case R.id.refresh_page:
+                Toast.makeText(getApplicationContext(),"Refreshing",Toast.LENGTH_SHORT).show();
                 callRecyclerView();
                 break;
 

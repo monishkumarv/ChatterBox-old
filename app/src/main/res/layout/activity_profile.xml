@@ -146,11 +146,12 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/coverpic"
+        android:id="@+id/cover_pic"
         android:layout_width="match_parent"
         android:layout_height="170dp"
         android:background="@drawable/cover"
-        android:onClick="ChangeProfilePic"/>
+        android:onClick="ChangeCover"
+        android:focusable="false"/>
 
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -160,7 +161,8 @@
         android:layout_marginTop="120dp"
         android:id="@+id/profile_pic"
         android:src="@drawable/ic_account_circle_pink_24dp"
-        android:onClick="ChangeProfilePic"/>
+        android:onClick="ChangeDP"
+        android:clickable="false"/>
 
     <ImageView
         android:layout_width="50dp"

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -27,6 +28,7 @@ public class ProfileActivity extends Activity {
     public EditText name,dob,phone,email,gender;
     public String phoneno;
     CircleImageView profilepic;
+    ImageView coverpic;
     private String TAG = "ProfileActivityLog";
 
     @Override
@@ -39,6 +41,7 @@ public class ProfileActivity extends Activity {
         email = findViewById(R.id.email_id);
         gender = findViewById(R.id.male_female);
         profilepic = findViewById(R.id.profile_pic);
+        coverpic = findViewById(R.id.cover_pic);
         phone = findViewById(R.id.number);
 
         Intent i = getIntent();
@@ -49,12 +52,18 @@ public class ProfileActivity extends Activity {
 
     }
 
-    public void ChangeProfilePic(View view){
+    public void ChangeDP(View view){
         Intent intent = new Intent(ProfileActivity.this,UploadImageActivity.class);
         intent.putExtra("MyPhoneNo", phoneno);
+        intent.putExtra("Picture_Type", "Profile Pic");
         startActivity(intent);
-        Toast.makeText(ProfileActivity.this,"Profile Pic Updated",Toast.LENGTH_SHORT).show();
+    }
 
+    public void ChangeCover(View view) {
+        Intent intent = new Intent(ProfileActivity.this,UploadImageActivity.class);
+        intent.putExtra("MyPhoneNo", phoneno);
+        intent.putExtra("Picture_Type", "Cover Pic");
+        startActivity(intent);
     }
 
     public void UpdateDetails(View v){
@@ -80,6 +89,7 @@ public class ProfileActivity extends Activity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                //Biodata setting
                 if (dataSnapshot.child("Name").exists())
                 { name.setText(dataSnapshot.child("Name").getValue().toString()); }
                 if (dataSnapshot.child("DOB").exists())
@@ -88,10 +98,13 @@ public class ProfileActivity extends Activity {
                 { email.setText(dataSnapshot.child("Email").getValue().toString()); }
                 if (dataSnapshot.child("Gender").exists())
                 { gender.setText(dataSnapshot.child("Gender").getValue().toString()); }
-
-                if (dataSnapshot.child("profilepic").exists())
+                // Picture Setting
+                if (dataSnapshot.child("Profile Pic").exists())
                 { Glide.with(ProfileActivity.this).asBitmap()
-                        .load(dataSnapshot.child("profilepic").getValue().toString()).into(profilepic); }
+                        .load(dataSnapshot.child("Profile Pic").getValue().toString()).into(profilepic); }
+                if (dataSnapshot.child("Cover Pic").exists())
+                { Glide.with(ProfileActivity.this).asBitmap()
+                        .load(dataSnapshot.child("Cover Pic").getValue().toString()).into(coverpic); }
             }
 
             @Override

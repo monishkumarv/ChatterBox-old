@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,6 +26,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerViewAdapter_Friends.ViewHolder>{
@@ -56,6 +59,7 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
 
         Log.d(TAG, "onBindViewHolder: called...............");
         setName(mFriendslist.get(position),holder);
+        SetProfilePic(mFriendslist.get(position),holder);
         setDateTime(mFriendslist.get(position),holder);
         setLastMsg(mFriendslist.get(position),holder);
 
@@ -126,11 +130,13 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView mPhoneNo,date,previousMessage;
+        CircleImageView profilepic;
         RelativeLayout parentLayout;   //layout of each induvidual units of the list
 
         public ViewHolder(View itemView) {
             super(itemView);
             mPhoneNo = itemView.findViewById(R.id.phone_no);
+            profilepic = itemView.findViewById(R.id.friend_profile_pic);
             previousMessage = itemView.findViewById(R.id.previous_message);
             date = itemView.findViewById(R.id.msg_date);
             parentLayout = itemView.findViewById(R.id.layout_list_friends);
@@ -158,6 +164,28 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
                     holder.mPhoneNo.setText(phoneNo);  // If profile is not created already
 
                 }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(TAG,"error:" + databaseError);
+            }
+        });
+    }
+
+    public void SetProfilePic(String phoneNo,ViewHolder holder) {
+
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference mReference = mDatabase.getReference().child("User Data").child(phoneNo);
+
+        mReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.child("Profile Pic").exists())
+                { Glide.with(mContext).asBitmap()
+                        .load(dataSnapshot.child("Profile Pic").getValue().toString()).into(holder.profilepic); }
 
             }
 

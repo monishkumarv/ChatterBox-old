@@ -21,7 +21,7 @@ public class UploadImageActivity extends AppCompatActivity {
     private static final int Pick_Photo = 1;
     DatabaseReference databaseReference;
     StorageReference storageReference;
-    private String myphoneno;
+    private String myphoneno, picturetype;
 
 
     @Override
@@ -31,9 +31,10 @@ public class UploadImageActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         myphoneno = i.getStringExtra("MyPhoneNo");
+        picturetype = i.getStringExtra("Picture_Type");
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("User Data").child(myphoneno);
-        storageReference = FirebaseStorage.getInstance().getReference().child("Profile Pics");
+        storageReference = FirebaseStorage.getInstance().getReference().child(picturetype);
 
         Toast.makeText(UploadImageActivity.this,"........",Toast.LENGTH_LONG).show();
         UploadImage();
@@ -69,17 +70,18 @@ public class UploadImageActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
 
-                            databaseReference.child("profilepic").setValue(String.valueOf(uri));
+                            databaseReference.child(picturetype).setValue(String.valueOf(uri));
 
-                            Toast.makeText(UploadImageActivity.this, "Done"+uri, Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(UploadImageActivity.this,ProfileActivity.class);
-//                            intent.putExtra("DP_URL",uri.toString());
                             startActivity(intent);
+
                         }
+
                     });
                 }
             });
         }
     }
+
 }
 

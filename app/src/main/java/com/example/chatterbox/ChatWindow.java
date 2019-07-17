@@ -2,14 +2,19 @@ package com.example.chatterbox;
 
 import android.content.Intent;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -43,14 +48,17 @@ public class ChatWindow extends AppCompatActivity {
         friendPhoneNo = i.getStringExtra("FRIEND_PHONENO");
         name = i.getStringExtra("Title");
 
+        // Action Bar (Title Bar)
+        ActionBar ab = getSupportActionBar();
+        ab.setLogo(R.drawable.ic_launcher_foreground);
+        ab.setDisplayUseLogoEnabled(false);
+        setTitle(friendPhoneNo);
+        if (name!=null){setTitle(name);}
+        ab.setDisplayShowHomeEnabled(true);
+
         // Getting Firebase Reference
         mfirebaseDatabase = FirebaseDatabase.getInstance();
         mdatabaseReference = mfirebaseDatabase.getReference().child("User Data");
-
-        // Setting Title
-        TextView Title = findViewById(R.id.title_phoneNo);
-        Title.setText(friendPhoneNo);
-        if (name!=null){Title.setText(name);}
 
         // Getting Old Messages
         RetrieveMessages(myPhoneNo,friendPhoneNo,myDisplayMessages,true);
@@ -144,5 +152,29 @@ public class ChatWindow extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater mf = getMenuInflater();
+        mf.inflate(R.menu.actionbar_chatwindow,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+
+           case R.id.view_profile:
+                Intent intent = new Intent(ChatWindow.this, ProfileActivity.class);
+                intent.putExtra("PhoneNo", friendPhoneNo);
+                startActivity(intent);break;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

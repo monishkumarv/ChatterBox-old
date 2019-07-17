@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/view_profile"
+        android:title="View Profile"
+        android:icon="@drawable/ic_account_circle_white_24dp"
+        app:showAsAction="never"></item>      <!-- app:showAsAction="never"...Shows menu options without icon-->
+
+</menu>
