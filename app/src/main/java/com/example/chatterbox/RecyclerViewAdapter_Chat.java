@@ -50,19 +50,15 @@ public class RecyclerViewAdapter_Chat extends RecyclerView.Adapter<RecyclerViewA
         Log.d(TAG, "onBindViewHolder: called.");
 
         if (mMessageList.get(position).IS_MSG_FROM_YOU) {
-//            holder.fromYou.setText("You");
             holder.mMessageYou.setText(mMessageList.get(position).message);
-            holder.fromYou.setVisibility(View.VISIBLE);
             holder.mMessageYou.setVisibility(View.VISIBLE);
-            holder.fromFriend.setVisibility(View.INVISIBLE);
+            holder.friendprofilepic.setVisibility(View.INVISIBLE);
             holder.mMessageFriend.setVisibility(View.INVISIBLE);
         }else {
             SetProfilePic(friendPhoneNo,holder);
-//            holder.fromFriend.setText("Friend");
+            holder.friendprofilepic.setVisibility(View.VISIBLE);
             holder.mMessageFriend.setText(mMessageList.get(position).message);
-            holder.fromFriend.setVisibility(View.VISIBLE);
             holder.mMessageFriend.setVisibility(View.VISIBLE);
-            holder.fromYou.setVisibility(View.INVISIBLE);
             holder.mMessageYou.setVisibility(View.INVISIBLE);
         }
         Log.d(TAG, "onBindViewHolder: ended.");
@@ -75,15 +71,13 @@ public class RecyclerViewAdapter_Chat extends RecyclerView.Adapter<RecyclerViewA
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView mMessageFriend,fromFriend,mMessageYou,fromYou;
+        TextView mMessageFriend,mMessageYou;
         CircleImageView friendprofilepic;
         RelativeLayout parentLayout;   //layout of each induvidual units of the list
 
         public ViewHolder(View itemView) {
             super(itemView);
-            fromFriend = itemView.findViewById(R.id.fromfriend);
             mMessageFriend = itemView.findViewById(R.id.disp_msg_friend);
-            fromYou = itemView.findViewById(R.id.fromyou);
             mMessageYou = itemView.findViewById(R.id.disp_msg_you);
             friendprofilepic = itemView.findViewById(R.id.friend_profile_pic);
             parentLayout = itemView.findViewById(R.id.layout_list_messages);

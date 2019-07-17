@@ -9,31 +9,21 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="0dp"
         android:id="@+id/friend_profile_pic"
         android:src="@mipmap/ic_launcher"
         android:onClick="ChangeDP"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="From"
-        android:id="@+id/fromfriend"
-        android:layout_toRightOf="@+id/friend_profile_pic"
-        android:textColor="#000"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        />
+
 
     <TextView
         android:id="@+id/disp_msg_friend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/fromfriend"
         android:layout_toRightOf="@+id/friend_profile_pic"
         android:padding="10dp"
-        android:layout_centerVertical="true"
         android:text="Message"
+        android:layout_marginTop="10dp"
         android:textColor="#FFF"
         android:textSize="17sp"
         android:background="@drawable/chat_bubble_violet"/>
@@ -42,7 +32,6 @@
         android:id="@+id/disp_msg_you"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/fromyou"
         android:layout_alignParentRight="true"
         android:layout_marginTop="1dp"
         android:padding="10dp"
@@ -51,15 +40,7 @@
         android:textSize="17sp"
         android:background="@drawable/chat_bubble_violet"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="You"
-        android:id="@+id/fromyou"
-        android:textColor="#000"
-        android:layout_alignParentRight="true"
-        android:textSize="12sp"
-        android:textStyle="bold" />
+
 
 
 
