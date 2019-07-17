@@ -7,8 +7,8 @@
     android:paddingVertical="5dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginTop="0dp"
         android:id="@+id/friend_profile_pic"
         android:src="@mipmap/ic_launcher"
@@ -21,7 +21,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/friend_profile_pic"
-        android:paddingHorizontal="10dp"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="20dp"
         android:text="Message"
         android:layout_marginTop="10dp"
         android:textColor="#FFF"
@@ -34,7 +35,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:padding="10dp"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="20dp"
         android:text="Message"
         android:textColor="#FFF"
         android:textSize="17sp"
