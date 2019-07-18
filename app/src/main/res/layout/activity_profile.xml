@@ -36,8 +36,7 @@
             android:hint="  Enter Your Name  "
             android:inputType="textPersonName"
             android:textColor="#FFFF"
-            android:textSize="15dp"
-            android:focusable="false"/>
+            android:textSize="15dp"/>
 
     </LinearLayout>
 
@@ -65,8 +64,7 @@
             android:hint="DOB"
             android:inputType="date"
             android:textColor="#FFFFFF"
-            android:textSize="15dp"
-            android:focusable="false"/>
+            android:textSize="15dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -121,8 +119,7 @@
             android:hint="  Email ID  "
             android:inputType="textEmailAddress"
             android:textColor="#FFFFFF"
-            android:textSize="15dp"
-            android:focusable="false"/>
+            android:textSize="15dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -149,17 +146,15 @@
             android:hint="  Male/Female  "
             android:inputType="text"
             android:textColor="#FFFFFF"
-            android:textSize="15dp"
-            android:focusable="false"/>
+            android:textSize="15dp"/>
     </LinearLayout>
 
     <ImageView
         android:id="@+id/cover_pic"
         android:layout_width="match_parent"
         android:layout_height="170dp"
-        android:src="@drawable/cover"
         android:onClick="ChangeCover"
-        android:focusable="false"/>
+        />
 
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -168,9 +163,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="120dp"
         android:id="@+id/profile_pic"
-        android:src="@drawable/ic_account_circle_pink_24dp"
-        android:onClick="ChangeDP"
-        android:focusable="false"/>
+        android:src="@drawable/ic_account_circle_grey_100dp"
+        android:onClick="ChangeDP" />
 
     <ImageView
         android:layout_width="50dp"
@@ -205,6 +199,15 @@
         android:text="Edit"
         android:textSize="30dp"
         android:layout_marginTop="200dp"
-        android:onClick="Edit"/>
+        android:onClick="Edit" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:gravity="center_horizontal"
+        android:text="Click here to dd a cover photo"
+        android:textSize="10dp"
+        android:textColor="#808080"/>
 
 </RelativeLayout>

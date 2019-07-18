@@ -40,7 +40,7 @@ public class ChatWindow extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_window);
-		
+
         mAuth = FirebaseAuth.getInstance();
         myPhoneNo = mAuth.getCurrentUser().getPhoneNumber();
         Intent i = getIntent();
@@ -66,9 +66,9 @@ public class ChatWindow extends AppCompatActivity {
     }
 
     private void callRecyclerView(ArrayList<Messages> allMessages){
+
         RecyclerView recyclerView = findViewById(R.id.chat_recycler_view);
         LinearLayoutManager mlayoutmanager = new LinearLayoutManager(this);
-
         RecyclerViewAdapter_Chat adapter = new RecyclerViewAdapter_Chat(this, allMessages,myPhoneNo,friendPhoneNo);
         mlayoutmanager.setStackFromEnd(true);
         recyclerView.setLayoutManager(mlayoutmanager);

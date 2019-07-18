@@ -39,8 +39,11 @@ public class RecyclerViewAdapter_Chat extends RecyclerView.Adapter<RecyclerViewA
         myPhoneNo = myphoneno;
         friendPhoneNo = friendphoneno;
 
-         mfirebaseDatabase = FirebaseDatabase.getInstance();
-         mdatabaseReference = mfirebaseDatabase.getReference().child("User Data");
+        mfirebaseDatabase = FirebaseDatabase.getInstance();
+        mdatabaseReference = mfirebaseDatabase.getReference().child("User Data");
+
+
+
     }
 
     @Override
