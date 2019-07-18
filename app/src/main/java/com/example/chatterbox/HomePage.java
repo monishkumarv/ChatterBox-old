@@ -145,6 +145,8 @@ public class HomePage extends AppCompatActivity {
         return false;
     }
 
+
+
     /** Action Bar...**/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

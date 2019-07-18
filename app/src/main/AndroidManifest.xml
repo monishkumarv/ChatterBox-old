@@ -21,7 +21,6 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ChatWindow"
-            android:parentActivityName=".HomePage"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".HomePage"

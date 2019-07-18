@@ -55,7 +55,19 @@
         android:visibility="invisible"/>
 
 
-
-
+    <TextView
+        android:id="@+id/typing_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/friend_profile_pic"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="20dp"
+        android:text="Typing..."
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="#FFF"
+        android:textSize="17sp"
+        android:background="@drawable/chat_bubble_green"
+        android:visibility="invisible"/>
 
 </RelativeLayout>

@@ -39,8 +39,8 @@ public class RecyclerViewAdapter_Chat extends RecyclerView.Adapter<RecyclerViewA
         myPhoneNo = myphoneno;
         friendPhoneNo = friendphoneno;
 
-        mfirebaseDatabase = FirebaseDatabase.getInstance();
-        mdatabaseReference = mfirebaseDatabase.getReference().child("User Data");
+         mfirebaseDatabase = FirebaseDatabase.getInstance();
+         mdatabaseReference = mfirebaseDatabase.getReference().child("User Data");
     }
 
     @Override
@@ -68,7 +68,6 @@ public class RecyclerViewAdapter_Chat extends RecyclerView.Adapter<RecyclerViewA
             holder.mMessageYou.setVisibility(View.INVISIBLE);
         }
 
-        isMessageRead(holder);
         Log.d(TAG, "onBindViewHolder: ended.");
     }
 
@@ -112,31 +111,6 @@ public class RecyclerViewAdapter_Chat extends RecyclerView.Adapter<RecyclerViewA
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.d(TAG,"error:" + databaseError);
-            }
-        });
-    }
-
-    String isMsgUnread;
-    private void isMessageRead(ViewHolder holder) {
-
-        mdatabaseReference.child(friendPhoneNo).child("unreadmessages").child(myPhoneNo).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                isMsgUnread = dataSnapshot.getValue().toString();
-
-                if (isMsgUnread.equals("false")){
-                    holder.readStatus.setVisibility(View.VISIBLE);
-                }else{
-                    holder.readStatus.setVisibility(View.INVISIBLE);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d(TAG, "error:" + databaseError);
-
             }
         });
     }

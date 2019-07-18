@@ -65,9 +65,9 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
 
         FirebaseDatabase mfirebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mdatabaseReference = mfirebaseDatabase.getReference().child("User Data")
-                .child(myPhoneNo)
-                .child("unreadmessages")
-                .child(mFriendslist.get(position));
+                                                                               .child(myPhoneNo)
+                                                                               .child("unreadmessages")
+                                                                               .child(mFriendslist.get(position));
         mdatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -120,6 +120,7 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
             }
         });
     }
+
 
     @Override
     public int getItemCount() {
@@ -254,4 +255,5 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
             }
         });
     }
+
 }

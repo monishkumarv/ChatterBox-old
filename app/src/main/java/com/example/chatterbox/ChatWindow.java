@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -52,7 +53,7 @@ public class ChatWindow extends AppCompatActivity {
         ab.setDisplayUseLogoEnabled(false);
         setTitle(friendPhoneNo);
         if (name!=null){setTitle(name);}
-        ab.setDisplayShowHomeEnabled(true);
+
 
         // Getting Firebase Reference
         mfirebaseDatabase = FirebaseDatabase.getInstance();
@@ -95,7 +96,7 @@ public class ChatWindow extends AppCompatActivity {
         mdatabaseReference.child(friendPhoneNo).child("messages").child(myPhoneNo).setValue(friendDisplayMessages);  //update friend's data
         callRecyclerView(myDisplayMessages);
 
-        // Setting message status as unread for ur friend
+        // Setting message status as read/unread for ur friend
         mdatabaseReference.child(friendPhoneNo).child("unreadmessages").child(myPhoneNo).setValue("true");
 
         // Date & Time of Last Message
@@ -110,7 +111,11 @@ public class ChatWindow extends AppCompatActivity {
         mdatabaseReference.child(myPhoneNo).child("lastmessage").child(friendPhoneNo).setValue(mybuffer.message);
         mdatabaseReference.child(friendPhoneNo).child("lastmessage").child(myPhoneNo).setValue(mybuffer.message);
 
+
+
     }
+
+
 
     public void RetrieveMessages(String parentNumber, String childNumber, final ArrayList<Messages> messagelist, final Boolean CALL_RECYCLERVIEW){
         Log.d(TAG,"Retrieving process started");
@@ -148,6 +153,18 @@ public class ChatWindow extends AppCompatActivity {
 
     }
 
+    private void setChatBoxOpenStatus(String status) {
+
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child("User Data")
+                .child(myPhoneNo)
+                .child("chatboxopenstatus")
+                .child(friendPhoneNo);
+
+        databaseReference.setValue(status);
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater mf = getMenuInflater();
@@ -171,5 +188,11 @@ public class ChatWindow extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        setChatBoxOpenStatus("false");
+        finish();
     }
 }
