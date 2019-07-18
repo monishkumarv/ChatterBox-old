@@ -153,18 +153,6 @@ public class ChatWindow extends AppCompatActivity {
 
     }
 
-    private void setChatBoxOpenStatus(String status) {
-
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference().child("User Data")
-                .child(myPhoneNo)
-                .child("chatboxopenstatus")
-                .child(friendPhoneNo);
-
-        databaseReference.setValue(status);
-
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater mf = getMenuInflater();
@@ -192,7 +180,6 @@ public class ChatWindow extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        setChatBoxOpenStatus("false");
         finish();
     }
 }
