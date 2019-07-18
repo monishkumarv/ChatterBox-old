@@ -11,7 +11,6 @@
         android:layout_height="30dp"
         android:layout_marginTop="0dp"
         android:id="@+id/friend_profile_pic"
-        android:src="@mipmap/ic_launcher"
         android:onClick="ChangeDP"/>
 
 
@@ -43,16 +42,18 @@
         android:textSize="17sp"
         android:background="@drawable/chat_bubble_blue"/>
 
-    <TextView
+    <ImageView
         android:id="@+id/check_read"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/disp_msg_you"
+        android:layout_marginTop="60dp"
         android:layout_marginLeft="300dp"
-        android:text="Read"
-        android:textSize="10dp"
+        android:layout_marginBottom="7dp"
         android:textColor="#000"
-        android:layout_alignBottom="@id/disp_msg_you"
-        android:visibility="invisible"/>
+        android:src="@drawable/ic_read_status_24dp"
+        android:textSize="10dp"
+        android:visibility="visible" />
 
 
     <TextView

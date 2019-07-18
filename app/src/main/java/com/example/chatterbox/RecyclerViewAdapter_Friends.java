@@ -57,7 +57,7 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        Log.d(TAG, "onBindViewHolder: called...............");
+        Log.d(TAG, "onBindViewHolder: called");
         setName(mFriendslist.get(position),holder);
         SetProfilePic(mFriendslist.get(position),holder);
         setDateTime(mFriendslist.get(position),holder);

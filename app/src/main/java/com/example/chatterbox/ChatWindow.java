@@ -83,8 +83,8 @@ public class ChatWindow extends AppCompatActivity {
         newmsg = msg.getText().toString();
         msg.getText().clear();
 
-        Messages mybuffer = new Messages(true,newmsg);
-        Messages frndbuffer = new Messages(false,newmsg);
+        Messages mybuffer = new Messages(true,newmsg,"unread");
+        Messages frndbuffer = new Messages(false,newmsg,"unread");
 
         RetrieveMessages(friendPhoneNo,myPhoneNo,friendDisplayMessages,false);
 
@@ -94,7 +94,6 @@ public class ChatWindow extends AppCompatActivity {
         // Updating Database...
         mdatabaseReference.child(myPhoneNo).child("messages").child(friendPhoneNo).setValue(myDisplayMessages);
         mdatabaseReference.child(friendPhoneNo).child("messages").child(myPhoneNo).setValue(friendDisplayMessages);  //update friend's data
-        callRecyclerView(myDisplayMessages);
 
         // Setting message status as read/unread for ur friend
         mdatabaseReference.child(friendPhoneNo).child("unreadmessages").child(myPhoneNo).setValue("true");
@@ -111,11 +110,10 @@ public class ChatWindow extends AppCompatActivity {
         mdatabaseReference.child(myPhoneNo).child("lastmessage").child(friendPhoneNo).setValue(mybuffer.message);
         mdatabaseReference.child(friendPhoneNo).child("lastmessage").child(myPhoneNo).setValue(mybuffer.message);
 
+        callRecyclerView(myDisplayMessages);
 
 
     }
-
-
 
     public void RetrieveMessages(String parentNumber, String childNumber, final ArrayList<Messages> messagelist, final Boolean CALL_RECYCLERVIEW){
         Log.d(TAG,"Retrieving process started");

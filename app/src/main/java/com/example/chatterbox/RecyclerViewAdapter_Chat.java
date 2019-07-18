@@ -55,17 +55,25 @@ public class RecyclerViewAdapter_Chat extends RecyclerView.Adapter<RecyclerViewA
 
         Log.d(TAG, "onBindViewHolder: called.");
 
+
         if (mMessageList.get(position).IS_MSG_FROM_YOU) {
             holder.mMessageYou.setText(mMessageList.get(position).message);
             holder.mMessageYou.setVisibility(View.VISIBLE);
             holder.friendprofilepic.setVisibility(View.INVISIBLE);
             holder.mMessageFriend.setVisibility(View.INVISIBLE);
+
+            checkReadStatus(position,holder);
         }else {
             SetProfilePic(friendPhoneNo,holder);
             holder.friendprofilepic.setVisibility(View.VISIBLE);
             holder.mMessageFriend.setText(mMessageList.get(position).message);
             holder.mMessageFriend.setVisibility(View.VISIBLE);
             holder.mMessageYou.setVisibility(View.INVISIBLE);
+
+            // Setting status as read
+            mdatabaseReference.child(myPhoneNo).child("messages").child(friendPhoneNo).child(String.valueOf(position)).child("status").setValue("read");
+            mdatabaseReference.child(friendPhoneNo).child("messages").child(myPhoneNo).child(String.valueOf(position)).child("status").setValue("read");
+
         }
 
         Log.d(TAG, "onBindViewHolder: ended.");
@@ -114,6 +122,32 @@ public class RecyclerViewAdapter_Chat extends RecyclerView.Adapter<RecyclerViewA
             }
         });
     }
+
+    private void checkReadStatus(int position, ViewHolder holder) {
+
+        mdatabaseReference.child(myPhoneNo).child("messages").child(friendPhoneNo).child(String.valueOf(position)).child("status")
+                .addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue().toString().equals("read"))
+                {
+                    holder.readStatus.setVisibility(View.VISIBLE);
+                }
+                else {
+                    holder.readStatus.setVisibility(View.INVISIBLE);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
 
 }
 
