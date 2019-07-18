@@ -6,13 +6,15 @@
     android:id="@+id/layout_list_friends"
     android:paddingBottom="7dp">
 
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="3dp"
         android:id="@+id/friend_profile_pic"
-        android:src="@mipmap/ic_launcher"
-        android:onClick="ChangeDP"/>
+        android:src="@drawable/ic_account_circle_grey_100dp"
+        android:onClick="ChangeDP"
+        android:clickable="false"/>
 
     <TextView
         android:id="@+id/phone_no"

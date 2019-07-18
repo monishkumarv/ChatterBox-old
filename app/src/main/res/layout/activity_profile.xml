@@ -7,11 +7,12 @@
     tools:context=".ProfileActivity"
     android:background="#FFFF">
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:onClick="BackButton"
-        android:src="@drawable/ic_arrow_back_white_24dp"/>
+        android:text="Click here to add a cover"
+        android:textSize="20dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,7 +37,8 @@
             android:hint="  Enter Your Name  "
             android:inputType="textPersonName"
             android:textColor="#FFFF"
-            android:textSize="15dp"/>
+            android:textSize="15dp"
+            android:focusable="false"/>
 
     </LinearLayout>
 
@@ -64,7 +66,8 @@
             android:hint="DOB"
             android:inputType="date"
             android:textColor="#FFFFFF"
-            android:textSize="15dp"/>
+            android:textSize="15dp"
+            android:focusable="false"/>
     </LinearLayout>
 
     <LinearLayout
@@ -119,7 +122,8 @@
             android:hint="  Email ID  "
             android:inputType="textEmailAddress"
             android:textColor="#FFFFFF"
-            android:textSize="15dp"/>
+            android:textSize="15dp"
+            android:focusable="false"/>
     </LinearLayout>
 
     <LinearLayout
@@ -146,7 +150,8 @@
             android:hint="  Male/Female  "
             android:inputType="text"
             android:textColor="#FFFFFF"
-            android:textSize="15dp"/>
+            android:textSize="15dp"
+            android:focusable="false"/>
     </LinearLayout>
 
     <ImageView
@@ -164,7 +169,8 @@
         android:layout_marginTop="120dp"
         android:id="@+id/profile_pic"
         android:src="@drawable/ic_account_circle_grey_100dp"
-        android:onClick="ChangeDP" />
+        android:onClick="ChangeDP"
+        android:clickable="false"/>
 
     <ImageView
         android:layout_width="50dp"
@@ -194,20 +200,12 @@
         android:textColor="#E91E63"/>
 
     <Button
+        android:id="@+id/is_editable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edit"
+        android:text="Edit Bio"
         android:textSize="30dp"
         android:layout_marginTop="200dp"
         android:onClick="Edit" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:gravity="center_horizontal"
-        android:text="Click here to dd a cover photo"
-        android:textSize="10dp"
-        android:textColor="#808080"/>
 
 </RelativeLayout>

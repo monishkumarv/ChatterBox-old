@@ -48,6 +48,4 @@
             android:background="@drawable/ic_send_black_24dp" />
     </RelativeLayout>
 
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

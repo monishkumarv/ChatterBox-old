@@ -1,8 +1,10 @@
 package com.example.chatterbox;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -61,15 +63,7 @@ public class HomePage extends AppCompatActivity {
 
     public void callRecyclerView(){
 
-        Log.d(TAG,"called...");
-
         RecyclerView recyclerView = findViewById(R.id.recycler_view_friends);
-        recyclerView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-            @Override
-            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                recyclerView.scrollToPosition(friendslist.size() - 1);
-            }
-        });
         RecyclerViewAdapter_Friends adapter = new RecyclerViewAdapter_Friends(this, this.friendslist,myPhoneNo);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
@@ -83,6 +77,11 @@ public class HomePage extends AppCompatActivity {
         String currentTime = DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date());
         EditText new_friend = findViewById(R.id.friend_phoneNo);
         friendPhoneNo = new_friend.getText().toString();
+
+        if (myPhoneNo.equals(friendPhoneNo)){
+            Toast.makeText(HomePage.this,"Try Again",Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         if (!checkFriend()){
             // updating Friends List
@@ -164,7 +163,7 @@ public class HomePage extends AppCompatActivity {
             case R.id.my_profile:
                 Intent intent = new Intent(HomePage.this, ProfileActivity.class);
                 intent.putExtra("PhoneNo", myPhoneNo);
-                intent.putExtra("Editable", true);
+                intent.putExtra("Editable", "true");
                 startActivity(intent);break;
 
             case R.id.refresh_page:
@@ -183,8 +182,27 @@ public class HomePage extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        finishAffinity();
-        finish();
+
+        AlertDialog.Builder a_builder = new AlertDialog.Builder(HomePage.this);
+        // a_builder(variable) is created for AlertBuilder datatype (analogy)
+        a_builder.setMessage("Your mates are going to miss u :(")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finishAffinity();
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();                        // Close the 'Dialogue box' and resumes the 'App'
+                    }
+                });
+        AlertDialog alert = a_builder.create();
+        alert.setTitle("Are u sure?");
+        alert.show();
 
     }
     public void signOut(){

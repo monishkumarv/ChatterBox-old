@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -30,6 +31,8 @@ public class ProfileActivity extends Activity {
     CircleImageView profilepic;
     ImageView coverpic;
     private String TAG = "ProfileActivityLog";
+    private String isEditable;
+    Button iseditable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,25 +41,38 @@ public class ProfileActivity extends Activity {
 
         name = findViewById(R.id.name);
         dob = findViewById(R.id.dob);
+        phone = findViewById(R.id.number);
         email = findViewById(R.id.email_id);
         gender = findViewById(R.id.male_female);
         profilepic = findViewById(R.id.profile_pic);
         coverpic = findViewById(R.id.cover_pic);
-        phone = findViewById(R.id.number);
+        iseditable = findViewById(R.id.is_editable);
 
         Intent i = getIntent();
         phoneno = i.getStringExtra("PhoneNo");
+        isEditable = i.getStringExtra("Editable");
         phone.setText(phoneno);
         setDetails();
+
+        if (isEditable.equals("true")){                // View Your Profile
+            coverpic.setEnabled(true);
+            profilepic.setEnabled(true);
+            iseditable.setVisibility(View.VISIBLE);
+        }else {                                        // View Friend's Profile
+            coverpic.setEnabled(false);
+            profilepic.setEnabled(false);
+            iseditable.setVisibility(View.INVISIBLE);
+        }
 
 
     }
 
     public void ChangeDP(View view){
-        Intent intent = new Intent(ProfileActivity.this,UploadImageActivity.class);
-        intent.putExtra("MyPhoneNo", phoneno);
-        intent.putExtra("Picture_Type", "Profile Pic");
-        startActivity(intent);
+
+         Intent intent = new Intent(ProfileActivity.this, UploadImageActivity.class);
+         intent.putExtra("MyPhoneNo", phoneno);
+         intent.putExtra("Picture_Type", "Profile Pic");
+         startActivity(intent);
     }
 
     public void ChangeCover(View view) {
@@ -68,21 +84,21 @@ public class ProfileActivity extends Activity {
 
     public void UpdateDetails(View view){
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference().child("User Data");
-        reference.child(phoneno).child("Name").setValue(name.getText().toString());
-        reference.child(phoneno).child("DOB").setValue(dob.getText().toString());
-        reference.child(phoneno).child("Email").setValue(email.getText().toString());
-        reference.child(phoneno).child("Gender").setValue(gender.getText().toString());
+        if (isEditable.equals("true")) {
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference reference = database.getReference().child("User Data");
+            reference.child(phoneno).child("Name").setValue(name.getText().toString());
+            reference.child(phoneno).child("DOB").setValue(dob.getText().toString());
+            reference.child(phoneno).child("Email").setValue(email.getText().toString());
+            reference.child(phoneno).child("Gender").setValue(gender.getText().toString());
 
-        Toast.makeText(ProfileActivity.this,"Profile Updated",Toast.LENGTH_SHORT).show();
+            Toast.makeText(ProfileActivity.this, "Profile Updated", Toast.LENGTH_SHORT).show();
 
-        coverpic.setFocusable(false);
-        profilepic.setFocusable(false);
-        name.setFocusable(false);
-        dob.setFocusable(false);
-        email.setFocusable(false);
-        gender.setFocusable(false);
+            name.setFocusable(false);
+            dob.setFocusable(false);
+            email.setFocusable(false);
+            gender.setFocusable(false);
+        }
     }
 
     public void setDetails() {
@@ -120,12 +136,11 @@ public class ProfileActivity extends Activity {
     }
 
     public void Edit(View view) {
-        coverpic.setFocusable(true);
-        profilepic.setFocusable(true);
-        name.setFocusable(true);
-        dob.setFocusable(true);
-        email.setFocusable(true);
-        gender.setFocusable(true);
+
+        name.setFocusableInTouchMode(true);
+        dob.setFocusableInTouchMode(true);
+        email.setFocusableInTouchMode(true);
+        gender.setFocusableInTouchMode(true);
     }
 
     public void BackButton(View view) {
