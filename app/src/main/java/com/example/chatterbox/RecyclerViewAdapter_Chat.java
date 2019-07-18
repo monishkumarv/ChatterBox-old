@@ -29,12 +29,18 @@ public class RecyclerViewAdapter_Chat extends RecyclerView.Adapter<RecyclerViewA
 
     private ArrayList<Messages> mMessageList = new ArrayList<>();
     private Context mContext;
-    private String friendPhoneNo;
+    private String myPhoneNo,friendPhoneNo;
+    public FirebaseDatabase mfirebaseDatabase;
+    public DatabaseReference mdatabaseReference;
 
-    public RecyclerViewAdapter_Chat(Context context, ArrayList<Messages> displaymessages, String phoneno) {
+    public RecyclerViewAdapter_Chat(Context context, ArrayList<Messages> displaymessages, String myphoneno, String friendphoneno) {
         mMessageList = displaymessages;
         mContext = context;
-        friendPhoneNo = phoneno;
+        myPhoneNo = myphoneno;
+        friendPhoneNo = friendphoneno;
+
+        mfirebaseDatabase = FirebaseDatabase.getInstance();
+        mdatabaseReference = mfirebaseDatabase.getReference().child("User Data");
     }
 
     @Override
@@ -61,8 +67,11 @@ public class RecyclerViewAdapter_Chat extends RecyclerView.Adapter<RecyclerViewA
             holder.mMessageFriend.setVisibility(View.VISIBLE);
             holder.mMessageYou.setVisibility(View.INVISIBLE);
         }
+
+        isMessageRead(holder);
         Log.d(TAG, "onBindViewHolder: ended.");
     }
+
 
     @Override
     public int getItemCount() {
@@ -71,7 +80,7 @@ public class RecyclerViewAdapter_Chat extends RecyclerView.Adapter<RecyclerViewA
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView mMessageFriend,mMessageYou;
+        TextView mMessageFriend,mMessageYou,readStatus;
         CircleImageView friendprofilepic;
         RelativeLayout parentLayout;   //layout of each induvidual units of the list
 
@@ -80,6 +89,7 @@ public class RecyclerViewAdapter_Chat extends RecyclerView.Adapter<RecyclerViewA
             mMessageFriend = itemView.findViewById(R.id.disp_msg_friend);
             mMessageYou = itemView.findViewById(R.id.disp_msg_you);
             friendprofilepic = itemView.findViewById(R.id.friend_profile_pic);
+            readStatus = itemView.findViewById(R.id.check_read);
             parentLayout = itemView.findViewById(R.id.layout_list_messages);
         }
     }
@@ -102,6 +112,31 @@ public class RecyclerViewAdapter_Chat extends RecyclerView.Adapter<RecyclerViewA
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.d(TAG,"error:" + databaseError);
+            }
+        });
+    }
+
+    String isMsgUnread;
+    private void isMessageRead(ViewHolder holder) {
+
+        mdatabaseReference.child(friendPhoneNo).child("unreadmessages").child(myPhoneNo).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                isMsgUnread = dataSnapshot.getValue().toString();
+
+                if (isMsgUnread.equals("false")){
+                    holder.readStatus.setVisibility(View.VISIBLE);
+                }else{
+                    holder.readStatus.setVisibility(View.INVISIBLE);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(TAG, "error:" + databaseError);
+
             }
         });
     }
