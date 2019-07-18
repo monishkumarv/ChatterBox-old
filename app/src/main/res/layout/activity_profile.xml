@@ -11,8 +11,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="BackButton"
+        android:layout_marginTop="70dp"
+        android:layout_centerHorizontal="true"
         android:text="Click here to add a cover"
-        android:textSize="20dp"/>
+        android:textColor="#808080"
+        android:textSize="15dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
