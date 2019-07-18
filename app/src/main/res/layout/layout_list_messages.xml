@@ -44,16 +44,16 @@
 
     <TextView
         android:id="@+id/check_read"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
         android:layout_alignEnd="@id/disp_msg_you"
-        android:layout_marginTop="60dp"
         android:layout_marginLeft="300dp"
+        android:layout_marginTop="60dp"
         android:layout_marginBottom="7dp"
-        android:textColor="#000"
         android:background="@drawable/ic_read_status_24dp"
+        android:textColor="#000"
         android:textSize="10dp"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
 
     <TextView
