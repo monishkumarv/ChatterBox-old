@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ChatWindow">
+    tools:context=".ChatWindow"
+    android:background="@drawable/background_chatbox"
+    >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chat_recycler_view"
@@ -45,7 +47,7 @@
             android:layout_toRightOf="@id/enter_message"
             android:layout_marginLeft="10dp"
             android:onClick="SendMessage"
-            android:background="@drawable/ic_send_black_24dp" />
+            android:background="@drawable/ic_send_blue_24dp" />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

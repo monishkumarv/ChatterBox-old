@@ -17,7 +17,7 @@
     <item
         android:id="@+id/refresh_page"
         android:title="Refresh"
-        android:icon="@drawable/ic_refresh_black_24dp"
+        android:icon="@drawable/ic_refresh_white_24dp"
         app:showAsAction="always"></item>
 
 </menu>

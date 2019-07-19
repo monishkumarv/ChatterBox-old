@@ -6,25 +6,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@drawable/image_background">
+    android:background="@drawable/backround_profilepage">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome"
+        android:textColor="#85FFFFFF"
+        android:textSize="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/chromatica"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign In Using Your Mobile Number"
         android:textColor="#85FFFFFF"
-        android:textSize="15dp"
+        android:textSize="13dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Welcome to Chatterbox !!"
-        android:textColor="#85FFFFFF"
-        android:textSize="30dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="80dp"/>
 
     <EditText
         android:id="@+id/enter_phoneNo"
@@ -36,13 +37,16 @@
         android:gravity="center"
         android:hint="Enter Phone No."
         android:text="+91"
-        android:textColor="#FFFF"
+        android:textSize="20dp"
+        android:fontFamily="@font/chromatica_medium"
+        android:textColor="#1C6CCC"
         android:background="@drawable/edittext"
-        android:inputType="phone"/>
+        android:inputType="phone"
+        android:maxLength="13"/>
 
     <EditText
         android:id="@+id/enter_otp"
-        android:layout_width="100dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:layout_centerHorizontal="true"
@@ -50,29 +54,32 @@
         android:gravity="center"
         android:hint="Enter OTP"
         android:inputType="number"
-        android:textColor="#FFFF"
+        android:textColor="#1C6CCC"
         android:background="@drawable/edittext"
+        android:maxLength="6"
         android:visibility="invisible" />
 
-    <Button
+    <TextView
         android:id="@+id/send_otp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:paddingHorizontal="20dp"
         android:layout_marginTop="350dp"
+        android:fontFamily="@font/chromatica_medium"
+        android:textSize="20dp"
         android:text="Send OTP"
-        android:background="@drawable/button_bg"
         android:textColor="#FFFF"/>
 
-    <Button
+    <TextView
         android:id="@+id/submit_otp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="350dp"
         android:paddingHorizontal="20dp"
-        android:background="@drawable/button_bg"
+        android:fontFamily="@font/chromatica_medium"
+        android:textSize="20dp"
         android:inputType="phone"
         android:text="Submit OTP"
         android:textColor="#FFFF"

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,8 +34,8 @@ public class MainActivity extends Activity {
     private static final String TAG = "MainActivity";
     public EditText phoneNo;
     public EditText otp;
-    public Button sendotp;
-    public Button submitotp;
+    public TextView sendotp;
+    public TextView submitotp;
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     String mVerificationId;
@@ -144,6 +145,9 @@ public class MainActivity extends Activity {
                                 CreateFirebaseDatabase(user);
                                 Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                                 intent.putExtra("PhoneNo", user.getPhoneNumber());
+                                intent.putExtra("PhoneNo", user.getPhoneNumber());
+                                intent.putExtra("NewUser", "true");
+                                intent.putExtra("Editable", "true");
                                 startActivity(intent);
                             } else {
                                 Intent intent = new Intent(MainActivity.this, HomePage.class);

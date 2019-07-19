@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomePage">
+    tools:context=".HomePage"
+    android:background="@drawable/background_homepage">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_friends"
@@ -39,7 +40,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:textColor="#FFFF"
-            android:background="@drawable/edittext3"/>
+            android:background="@drawable/edittext3"
+            android:maxLength="13"/>
 
         <TextView
             android:id="@+id/add_friend"

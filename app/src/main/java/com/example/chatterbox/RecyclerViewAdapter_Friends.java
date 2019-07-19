@@ -162,7 +162,7 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
                 }else
                 {
                     NameExists = true;
-                    holder.mPhoneNo.setText(phoneNo);  // If profile is not created already
+                    holder.mPhoneNo.setText(phoneNo);  // If activity_profile is not created already
 
                 }
 

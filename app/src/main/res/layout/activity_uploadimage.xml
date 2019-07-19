@@ -5,17 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UploadImageActivity"
-    android:gravity="center"
-    android:background="@drawable/edittext">
+    android:gravity="center_horizontal"
+    android:background="@drawable/background_uploadpic">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="290dp"
         android:padding="20dp"
-        android:text="Please Wait... \n\n Updating Profile Pic !"
+        android:text="Please Wait..."
         android:textSize="20dp"
-        android:textStyle="italic"
+        android:fontFamily="casual"
+        android:textStyle="bold"
         android:gravity="center"
-        android:textColor="#2196F3"
-        android:background="@drawable/recyclerlist_item_bg"/>
+        android:textColor="#000"/>
 
 </LinearLayout>

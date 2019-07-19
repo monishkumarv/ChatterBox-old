@@ -78,8 +78,15 @@ public class HomePage extends AppCompatActivity {
         EditText new_friend = findViewById(R.id.friend_phoneNo);
         friendPhoneNo = new_friend.getText().toString();
 
-        if (myPhoneNo.equals(friendPhoneNo)){
+
+        if (myPhoneNo.equals(friendPhoneNo) ){
             Toast.makeText(HomePage.this,"Try Again",Toast.LENGTH_SHORT).show();
+            new_friend.setText("+91");
+            return;
+        }
+        if (myPhoneNo.length() != 13){
+            Toast.makeText(HomePage.this,"Try Again",Toast.LENGTH_SHORT).show();
+            new_friend.setText("+91");
             return;
         }
 
@@ -164,6 +171,7 @@ public class HomePage extends AppCompatActivity {
                 Intent intent = new Intent(HomePage.this, ProfileActivity.class);
                 intent.putExtra("PhoneNo", myPhoneNo);
                 intent.putExtra("Editable", "true");
+                intent.putExtra("NewUser", "false");
                 startActivity(intent);break;
 
             case R.id.refresh_page:

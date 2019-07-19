@@ -7,18 +7,18 @@
                 android:angle="180"
                 android:startColor="#81756F6F"
                 android:endColor="#FFFFFF"/>
-            <corners android:radius="10dp" />
+            <corners android:radius="30dp" />
         </shape>
     </item>
 
     <item
         android:left="0dp"
-        android:right="10dp"
+        android:right="0dp"
         android:top="0dp"
-        android:bottom="10dp">
+        android:bottom="0dp">
         <shape android:shape="rectangle">
             <solid android:color="#FFFFFF"/>
-            <corners android:radius="10dp" />
+            <corners android:radius="30dp" />
         </shape>
     </item>
 </layer-list>

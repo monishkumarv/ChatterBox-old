@@ -40,7 +40,8 @@
         android:text="Message"
         android:textColor="#FFF"
         android:textSize="17sp"
-        android:background="@drawable/chat_bubble_blue"/>
+        android:background="@drawable/chat_bubble_blue"
+        android:maxEms="15" />
 
     <TextView
         android:id="@+id/check_read"
@@ -50,7 +51,7 @@
         android:layout_marginLeft="300dp"
         android:layout_marginTop="60dp"
         android:layout_marginBottom="7dp"
-        android:background="@drawable/ic_read_status_24dp"
+        android:background="@drawable/ic_doubletick_24dp"
         android:textColor="#000"
         android:textSize="10dp"
         android:visibility="invisible" />
@@ -69,6 +70,7 @@
         android:textColor="#FFF"
         android:textSize="17sp"
         android:background="@drawable/chat_bubble_green"
-        android:visibility="invisible"/>
+        android:visibility="invisible"
+        android:maxEms="15"/>
 
 </RelativeLayout>

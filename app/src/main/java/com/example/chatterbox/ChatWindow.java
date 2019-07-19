@@ -162,9 +162,10 @@ public class ChatWindow extends AppCompatActivity {
         switch (item.getItemId()){
 
            case R.id.view_profile:
-                Intent intent = new Intent(ChatWindow.this, ProfileActivity.class);
-                intent.putExtra("PhoneNo", friendPhoneNo);
+               Intent intent = new Intent(ChatWindow.this, ProfileActivity.class);
+               intent.putExtra("PhoneNo", friendPhoneNo);
                intent.putExtra("Editable", "false");
+               intent.putExtra("NewUser", "false");
                startActivity(intent);break;
 
             default:
