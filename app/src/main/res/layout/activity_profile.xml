@@ -251,7 +251,7 @@
         android:onClick="UpdateDetails"
         android:textColor="#EE9C27B0"
         android:textSize="20dp"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
 
 
