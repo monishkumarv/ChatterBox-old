@@ -16,7 +16,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 
-public class UploadImageActivity extends AppCompatActivity {
+public class asf extends AppCompatActivity {
 
     private static final int Pick_Photo = 1;
     public DatabaseReference databaseReference;
@@ -36,14 +36,13 @@ public class UploadImageActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference().child("User Data").child(myphoneno);
         storageReference = FirebaseStorage.getInstance().getReference().child(picturetype);
 
-        Toast.makeText(UploadImageActivity.this,"........",Toast.LENGTH_LONG).show();
+        Toast.makeText(asf.this,"........",Toast.LENGTH_LONG).show();
         UploadImage();
 
     }
 
 
     public void UploadImage() {
-
 
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
@@ -72,7 +71,7 @@ public class UploadImageActivity extends AppCompatActivity {
 
                             databaseReference.child(picturetype).setValue(String.valueOf(uri));
 
-                            Intent intent = new Intent(UploadImageActivity.this,ProfileActivity.class);
+                            Intent intent = new Intent(asf.this,ProfileActivity.class);
                             startActivity(intent);
 
                         }

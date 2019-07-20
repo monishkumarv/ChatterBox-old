@@ -45,8 +45,6 @@ public class ChatWindow extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_window);
 
-        Log.d(TAG,"......................................................");
-
         mAuth = FirebaseAuth.getInstance();
         myPhoneNo = mAuth.getCurrentUser().getPhoneNumber();
         Intent i = getIntent();
@@ -188,7 +186,7 @@ public class ChatWindow extends AppCompatActivity {
                     messagelist.add(temp);
 
                     if(CALL_RECYCLERVIEW){
-                         callRecyclerView(myDisplayMessages,false);
+                        callRecyclerView(myDisplayMessages,false);
                         Log.d(TAG,"RecyclerView updated");
 
                     }
@@ -215,12 +213,12 @@ public class ChatWindow extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
 
-           case R.id.view_profile:
-               Intent intent = new Intent(ChatWindow.this, ProfileActivity.class);
-               intent.putExtra("PhoneNo", friendPhoneNo);
-               intent.putExtra("Editable", "false");
-               intent.putExtra("NewUser", "false");
-               startActivity(intent);break;
+            case R.id.view_profile:
+                Intent intent = new Intent(ChatWindow.this, ProfileActivity.class);
+                intent.putExtra("PhoneNo", friendPhoneNo);
+                intent.putExtra("Editable", "false");
+                intent.putExtra("NewUser", "false");
+                startActivity(intent);break;
 
             default:
                 return super.onOptionsItemSelected(item);

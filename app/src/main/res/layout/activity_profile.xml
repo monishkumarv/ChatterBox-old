@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backround_profilepage"
-    tools:context=".ProfileActivity"
     android:paddingHorizontal="30dp">
 
     <TextView
@@ -252,6 +251,16 @@
         android:textColor="#EE9C27B0"
         android:textSize="20dp"
         android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/save_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Done"
+        android:textSize="30dp"
+        android:onClick="UploadImage"
+        android:visibility="invisible"/>
 
 
 

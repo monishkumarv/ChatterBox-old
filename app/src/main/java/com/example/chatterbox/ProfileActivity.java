@@ -109,7 +109,6 @@ public class ProfileActivity extends Activity {
 
          Intent intent = new Intent(ProfileActivity.this, UploadImageActivity.class);
          intent.putExtra("MyPhoneNo", phoneno);
-         intent.putExtra("Picture_Type", "Profile Pic");
          startActivity(intent);
     }
 
