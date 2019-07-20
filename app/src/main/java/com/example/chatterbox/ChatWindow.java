@@ -83,9 +83,9 @@ public class ChatWindow extends AppCompatActivity {
 
                 // Shows in your friend's database...Whether you are Typing
                 if (s.length() != 0){
-                    mdatabaseReference.child(friendPhoneNo).child("Typing Status").child(myPhoneNo).setValue("true");
+                    mdatabaseReference.child(friendPhoneNo).child("typing status").child(myPhoneNo).setValue("true");
                 }else {
-                    mdatabaseReference.child(friendPhoneNo).child("Typing Status").child(myPhoneNo).setValue("false");
+                    mdatabaseReference.child(friendPhoneNo).child("typing status").child(myPhoneNo).setValue("false");
                 }
             }
 
@@ -96,7 +96,7 @@ public class ChatWindow extends AppCompatActivity {
         });
 
         // Checking and Updating TYPE STATUS...
-        mdatabaseReference.child(myPhoneNo).child("Typing Status").child(friendPhoneNo).addValueEventListener(new ValueEventListener() {
+        mdatabaseReference.child(myPhoneNo).child("typing status").child(friendPhoneNo).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
