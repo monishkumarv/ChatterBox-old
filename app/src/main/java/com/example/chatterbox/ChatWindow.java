@@ -29,9 +29,10 @@ import java.util.Date;
 public class ChatWindow extends AppCompatActivity {
 
     private static final String TAG = "ChatWindowLog";
-    String friendPhoneNo,newmsg, myPhoneNo,name;
-    ArrayList<Messages> myDisplayMessages = new ArrayList<>();
-    ArrayList<Messages> friendDisplayMessages = new ArrayList<>();
+    public String friendPhoneNo,newmsg, myPhoneNo,name;
+    public EditText msg;
+    public ArrayList<Messages> myDisplayMessages = new ArrayList<>();
+    public ArrayList<Messages> friendDisplayMessages = new ArrayList<>();
     public FirebaseAuth mAuth;
     public FirebaseDatabase mfirebaseDatabase;
     public DatabaseReference mdatabaseReference;
@@ -63,6 +64,9 @@ public class ChatWindow extends AppCompatActivity {
         RetrieveMessages(myPhoneNo,friendPhoneNo,myDisplayMessages,true);
         RetrieveMessages(friendPhoneNo,myPhoneNo,friendDisplayMessages,true);
 
+        msg = findViewById(R.id.enter_message);
+
+
     }
 
     private void callRecyclerView(ArrayList<Messages> allMessages){
@@ -79,7 +83,6 @@ public class ChatWindow extends AppCompatActivity {
 
     public void SendMessage(View view){
 
-        EditText msg = findViewById(R.id.enter_message);
         newmsg = msg.getText().toString();
         msg.getText().clear();
 

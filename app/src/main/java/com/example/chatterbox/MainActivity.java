@@ -37,8 +37,8 @@ public class MainActivity extends Activity {
     public TextView sendotp;
     public TextView submitotp;
 
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    String mVerificationId;
+    public FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    public String mVerificationId;
 
 
     @Override
@@ -115,7 +115,7 @@ public class MainActivity extends Activity {
         signInWithPhoneAuthCredential(credential);
     }
 
-    String usertypedcode;
+    public String usertypedcode;
 
     private void getcode() {
         submitotp.setOnClickListener(new View.OnClickListener() {

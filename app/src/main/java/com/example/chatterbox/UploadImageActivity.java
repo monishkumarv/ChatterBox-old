@@ -19,8 +19,8 @@ import com.google.firebase.storage.UploadTask;
 public class UploadImageActivity extends AppCompatActivity {
 
     private static final int Pick_Photo = 1;
-    DatabaseReference databaseReference;
-    StorageReference storageReference;
+    public DatabaseReference databaseReference;
+    public StorageReference storageReference;
     private String myphoneno, picturetype;
 
 

@@ -25,10 +25,10 @@ public class ProfileActivity extends Activity {
 
     public EditText name,dob,phone,email,gender,bio;
     public String phoneno,isEditable,isNewUser;
-    CircleImageView profilepic;
+    public CircleImageView profilepic;
     private String TAG = "ProfileActivityLog";
-    Button iseditable,submitprofile;
-    TextView createprofileTv;
+    public Button iseditable,submitprofile;
+    public TextView createprofileTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,10 +149,5 @@ public class ProfileActivity extends Activity {
         gender.setFocusableInTouchMode(true);
         bio.setFocusableInTouchMode(true);
         submitprofile.setVisibility(View.VISIBLE);
-    }
-
-    public void BackButton(View view) {
-        Intent intent = new Intent(ProfileActivity.this, HomePage.class);
-        startActivity(intent);
     }
 }

@@ -35,7 +35,7 @@ public class HomePage extends AppCompatActivity {
     private FirebaseDatabase mfirebaseDatabase;
     private DatabaseReference mdatabaseReference;
 
-    String myPhoneNo,friendPhoneNo;
+    public String myPhoneNo,friendPhoneNo;
     private ArrayList<String> friendslist = new ArrayList<>();
 
     @Override
