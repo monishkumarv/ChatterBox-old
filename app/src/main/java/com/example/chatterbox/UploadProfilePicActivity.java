@@ -28,7 +28,7 @@ import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class UploadImageActivity extends AppCompatActivity {
+public class UploadProfilePicActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 111;
     private CircleImageView profilepic;
@@ -37,7 +37,7 @@ public class UploadImageActivity extends AppCompatActivity {
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
     private String myphoneno;
-    private String TAG = "UploadImageActivity";
+    private String TAG = "UploadProfilePicActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +51,7 @@ public class UploadImageActivity extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference().child("Profile Pic").child(myphoneno);
         profilepic = findViewById(R.id.profile_pic);
         savepic = findViewById(R.id.save_pic);
+        profilepic.setEnabled(false);
         savepic.setVisibility(View.VISIBLE);
 
         checkFilePermissions();
@@ -60,8 +61,8 @@ public class UploadImageActivity extends AppCompatActivity {
 
     private void checkFilePermissions() {
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
-            int permissionCheck = UploadImageActivity.this.checkSelfPermission("Manifest.permission.READ_EXTERNAL_STORAGE");
-            permissionCheck += UploadImageActivity.this.checkSelfPermission("Manifest.permission.WRITE_EXTERNAL_STORAGE");
+            int permissionCheck = UploadProfilePicActivity.this.checkSelfPermission("Manifest.permission.READ_EXTERNAL_STORAGE");
+            permissionCheck += UploadProfilePicActivity.this.checkSelfPermission("Manifest.permission.WRITE_EXTERNAL_STORAGE");
             if (permissionCheck != 0) {
                 this.requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE,android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1001); //Any number
             }
@@ -146,7 +147,7 @@ public class UploadImageActivity extends AppCompatActivity {
             {
                 Log.d(TAG,"Uploading url");
                 databaseReference.child("Profile Pic").setValue(String.valueOf(downloadUrl));
-                Intent intent = new Intent(UploadImageActivity.this,ProfileActivity.class);
+                Intent intent = new Intent(UploadProfilePicActivity.this,ProfileActivity.class);
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
                 Log.d(TAG,"Uploading url");

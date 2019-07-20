@@ -14,10 +14,7 @@
         android:roundIcon="@drawable/ic_message_blue_24dp"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UploadImageActivity"></activity>
-        <activity
-            android:name=".asf"
-            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".UploadProfilePicActivity"></activity>
         <activity
             android:name=".ProfileActivity"
             android:theme="@style/hidetitlebar"

@@ -107,7 +107,7 @@ public class ProfileActivity extends Activity {
 
     public void ChangeDP(View view){
 
-         Intent intent = new Intent(ProfileActivity.this, UploadImageActivity.class);
+         Intent intent = new Intent(ProfileActivity.this, UploadProfilePicActivity.class);
          intent.putExtra("MyPhoneNo", phoneno);
          startActivity(intent);
     }
