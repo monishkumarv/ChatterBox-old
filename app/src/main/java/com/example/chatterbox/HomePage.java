@@ -101,6 +101,9 @@ public class HomePage extends AppCompatActivity {
             mdatabaseReference.child(friendPhoneNo).child("date_time").child(myPhoneNo).child("date").setValue(currentDate);
             mdatabaseReference.child(friendPhoneNo).child("date_time").child(myPhoneNo).child("time").setValue(currentTime);
 
+            //
+//            mdatabaseReference.child(myPhoneNo).child("Typing Status").child(friendPhoneNo).setValue("false");
+
             callRecyclerView();
 
         } new_friend.setText("+91");

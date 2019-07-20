@@ -30,14 +30,21 @@ public class RecyclerViewAdapter_Chat extends RecyclerView.Adapter<RecyclerViewA
     private ArrayList<Messages> mMessageList = new ArrayList<>();
     private Context mContext;
     private String myPhoneNo,friendPhoneNo;
+    private Boolean isTyping;
     public FirebaseDatabase mfirebaseDatabase;
     public DatabaseReference mdatabaseReference;
 
-    public RecyclerViewAdapter_Chat(Context context, ArrayList<Messages> displaymessages, String myphoneno, String friendphoneno) {
+    public RecyclerViewAdapter_Chat(Context context, ArrayList<Messages> displaymessages, String myphoneno, String friendphoneno, Boolean typingStatus) {
         mMessageList = displaymessages;
         mContext = context;
         myPhoneNo = myphoneno;
         friendPhoneNo = friendphoneno;
+        isTyping = typingStatus;
+
+        if(isTyping){
+            Messages typebuffer = new Messages(false,"Typing...","typing");
+            mMessageList.add(typebuffer);
+        }
 
         mfirebaseDatabase = FirebaseDatabase.getInstance();
         mdatabaseReference = mfirebaseDatabase.getReference().child("User Data");
@@ -65,7 +72,9 @@ public class RecyclerViewAdapter_Chat extends RecyclerView.Adapter<RecyclerViewA
             holder.friendprofilepic.setVisibility(View.INVISIBLE);
             holder.mMessageFriend.setVisibility(View.INVISIBLE);
 
-            checkReadStatus(position,holder);
+            if(!isTyping) {
+                checkReadStatus(position, holder);
+            }
         }else {
             SetProfilePic(friendPhoneNo,holder);
             holder.friendprofilepic.setVisibility(View.VISIBLE);
@@ -73,10 +82,12 @@ public class RecyclerViewAdapter_Chat extends RecyclerView.Adapter<RecyclerViewA
             holder.mMessageFriend.setVisibility(View.VISIBLE);
             holder.mMessageYou.setVisibility(View.INVISIBLE);
 
-            // Setting status as read
-            mdatabaseReference.child(myPhoneNo).child("messages").child(friendPhoneNo).child(String.valueOf(position)).child("status").setValue("read");
-            mdatabaseReference.child(friendPhoneNo).child("messages").child(myPhoneNo).child(String.valueOf(position)).child("status").setValue("read");
-
+            if (!isTyping) {
+                // Setting status as read
+                mdatabaseReference.child(myPhoneNo).child("messages").child(friendPhoneNo).child(String.valueOf(position)).child("status").setValue("read");
+                mdatabaseReference.child(friendPhoneNo).child("messages").child(myPhoneNo).child(String.valueOf(position)).child("status").setValue("read");
+                mdatabaseReference.child(myPhoneNo).child("unreadmessages").child(friendPhoneNo).setValue("false");
+            }
         }
 
         Log.d(TAG, "onBindViewHolder: ended.");

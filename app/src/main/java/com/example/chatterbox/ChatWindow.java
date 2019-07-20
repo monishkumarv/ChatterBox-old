@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -42,6 +45,8 @@ public class ChatWindow extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_window);
 
+        Log.d(TAG,"......................................................");
+
         mAuth = FirebaseAuth.getInstance();
         myPhoneNo = mAuth.getCurrentUser().getPhoneNumber();
         Intent i = getIntent();
@@ -66,14 +71,60 @@ public class ChatWindow extends AppCompatActivity {
 
         msg = findViewById(R.id.enter_message);
 
+        // Send TYPE STATUE...
+        msg.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                // Shows in your friend's database...Whether you are Typing
+                if (s.length() != 0){
+                    mdatabaseReference.child(friendPhoneNo).child("Typing Status").child(myPhoneNo).setValue("true");
+                }else {
+                    mdatabaseReference.child(friendPhoneNo).child("Typing Status").child(myPhoneNo).setValue("false");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        // Checking and Updating TYPE STATUS...
+        mdatabaseReference.child(myPhoneNo).child("Typing Status").child(friendPhoneNo).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot.exists()){
+                    if (dataSnapshot.getValue().toString().equals("true")){
+                        Log.d(TAG,"Typing...");
+
+                        callRecyclerView(myDisplayMessages,true);
+
+                    }else {
+                        RetrieveMessages(myPhoneNo,friendPhoneNo,myDisplayMessages,true);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
-    private void callRecyclerView(ArrayList<Messages> allMessages){
+    private void callRecyclerView(ArrayList<Messages> allMessages, Boolean isTyping){
 
         RecyclerView recyclerView = findViewById(R.id.chat_recycler_view);
         LinearLayoutManager mlayoutmanager = new LinearLayoutManager(this);
-        RecyclerViewAdapter_Chat adapter = new RecyclerViewAdapter_Chat(this, allMessages,myPhoneNo,friendPhoneNo);
+        RecyclerViewAdapter_Chat adapter = new RecyclerViewAdapter_Chat(this, allMessages,myPhoneNo,friendPhoneNo,isTyping);
         mlayoutmanager.setStackFromEnd(true);
         recyclerView.setLayoutManager(mlayoutmanager);
         recyclerView.setAdapter(adapter);
@@ -113,7 +164,7 @@ public class ChatWindow extends AppCompatActivity {
         mdatabaseReference.child(myPhoneNo).child("lastmessage").child(friendPhoneNo).setValue(mybuffer.message);
         mdatabaseReference.child(friendPhoneNo).child("lastmessage").child(myPhoneNo).setValue(mybuffer.message);
 
-        callRecyclerView(myDisplayMessages);
+        callRecyclerView(myDisplayMessages,false);
 
 
     }
@@ -137,7 +188,7 @@ public class ChatWindow extends AppCompatActivity {
                     messagelist.add(temp);
 
                     if(CALL_RECYCLERVIEW){
-                         callRecyclerView(myDisplayMessages);
+                         callRecyclerView(myDisplayMessages,false);
                         Log.d(TAG,"RecyclerView updated");
 
                     }
