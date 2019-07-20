@@ -57,7 +57,8 @@
                 android:hint="Enter Your Name  "
                 android:inputType="textPersonName"
                 android:textColor="#000"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                android:clickable="false"/>
 
         </RelativeLayout>
 

@@ -10,15 +10,20 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -30,13 +35,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UploadProfilePicActivity extends AppCompatActivity {
 
-    private static final int PICK_IMAGE_REQUEST = 111;
+    public EditText name,dob,phone,email,gender,bio;
     private CircleImageView profilepic;
-    private Button savepic;
+    private Button savepic,isEditable;
     private Uri filePath;
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
     private String myphoneno;
+    private static final int PICK_IMAGE_REQUEST = 111;
+
     private String TAG = "UploadProfilePicActivity";
 
     @Override
@@ -44,19 +51,30 @@ public class UploadProfilePicActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        name = findViewById(R.id.name);
+        dob = findViewById(R.id.dob);
+        phone = findViewById(R.id.number);
+        email = findViewById(R.id.email_id);
+        gender = findViewById(R.id.male_female);
+        profilepic = findViewById(R.id.profile_pic);
+        bio = findViewById(R.id.bio_et);
+        savepic = findViewById(R.id.save_pic);
+        isEditable = findViewById(R.id.is_editable);
+
         Intent i = getIntent();
         myphoneno = i.getStringExtra("MyPhoneNo");
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("User Data").child(myphoneno);
         storageReference = FirebaseStorage.getInstance().getReference().child("Profile Pic").child(myphoneno);
-        profilepic = findViewById(R.id.profile_pic);
-        savepic = findViewById(R.id.save_pic);
+
+
         profilepic.setEnabled(false);
         savepic.setVisibility(View.VISIBLE);
+        isEditable.setVisibility(View.INVISIBLE);
 
         checkFilePermissions();
+        setDetails();
         showFileChooser();
-
     }
 
     private void checkFilePermissions() {
@@ -155,5 +173,41 @@ public class UploadProfilePicActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    public void setDetails() {
+
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference mReference = mDatabase.getReference().child("User Data").child(myphoneno);
+
+        mReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                //Biodata setting
+                if (dataSnapshot.child("Name").exists())
+                { name.setText(dataSnapshot.child("Name").getValue().toString()); }
+                if (dataSnapshot.child("DOB").exists())
+                { dob.setText(dataSnapshot.child("DOB").getValue().toString()); }
+                if (dataSnapshot.child("Email").exists())
+                { email.setText(dataSnapshot.child("Email").getValue().toString()); }
+                if (dataSnapshot.child("Gender").exists())
+                { gender.setText(dataSnapshot.child("Gender").getValue().toString()); }
+                if (dataSnapshot.child("Bio").exists())
+                { bio.setText(dataSnapshot.child("Bio").getValue().toString()); }
+
+                // Profile Picture Setting
+                if (dataSnapshot.child("Profile Pic").exists())
+                { Glide.with(UploadProfilePicActivity.this).asBitmap()
+                        .load(dataSnapshot.child("Profile Pic").getValue().toString()).into(profilepic); }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(TAG,"error:" + databaseError);
+            }
+        });
+    }
+
 
 }
