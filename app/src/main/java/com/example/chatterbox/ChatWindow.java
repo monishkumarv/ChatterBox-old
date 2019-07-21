@@ -233,4 +233,19 @@ public class ChatWindow extends AppCompatActivity {
     public void onBackPressed() {
         finish();
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mdatabaseReference.child(myPhoneNo).child("OnlineStatus").setValue("true");
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mdatabaseReference.child(myPhoneNo).child("OnlineStatus").setValue("false");
+
+    }
 }

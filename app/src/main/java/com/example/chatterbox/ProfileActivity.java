@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,6 +30,7 @@ public class ProfileActivity extends Activity {
     private String TAG = "ProfileActivityLog";
     public Button iseditable,submitprofile;
     public TextView createprofileTv;
+    private DatabaseReference mdatabaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,5 +150,27 @@ public class ProfileActivity extends Activity {
         gender.setFocusableInTouchMode(true);
         bio.setFocusableInTouchMode(true);
         submitprofile.setVisibility(View.VISIBLE);
+    }
+
+
+
+    FirebaseAuth mAuth;
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAuth = FirebaseAuth.getInstance();
+        String myPhoneNo = mAuth.getCurrentUser().getPhoneNumber();
+        mdatabaseReference = FirebaseDatabase.getInstance().getReference().child("User Data"); // Used for setting Online status
+        mdatabaseReference.child(myPhoneNo).child("OnlineStatus").setValue("true");
+
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mAuth = FirebaseAuth.getInstance();
+        String myPhoneNo = mAuth.getCurrentUser().getPhoneNumber();
+        mdatabaseReference = FirebaseDatabase.getInstance().getReference().child("User Data"); // Used for setting Online status
+        mdatabaseReference.child(myPhoneNo).child("OnlineStatus").setValue("false");
+
     }
 }

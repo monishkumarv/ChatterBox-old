@@ -59,6 +59,17 @@
         android:text="___________________________________________"
          />
 
+    <ImageView
+        android:id="@+id/online_status"
+        android:layout_width="7dp"
+        android:layout_height="7dp"
+        android:gravity="center"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/ic_onlinestatus_blue_24dp"
+        android:layout_toRightOf="@id/phone_no"
+        android:layout_marginLeft="5dp"
+        android:visibility="invisible"/>
+
 
 
 </RelativeLayout>

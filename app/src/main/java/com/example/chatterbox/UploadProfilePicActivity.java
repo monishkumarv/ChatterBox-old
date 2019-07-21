@@ -40,7 +40,7 @@ public class UploadProfilePicActivity extends AppCompatActivity {
     private Button savepic,isEditable;
     private Uri filePath;
     private StorageReference storageReference;
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference,mdatabaseReference;
     private String myphoneno;
     private static final int PICK_IMAGE_REQUEST = 111;
 
@@ -63,6 +63,7 @@ public class UploadProfilePicActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         myphoneno = i.getStringExtra("MyPhoneNo");
+
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("User Data").child(myphoneno);
         storageReference = FirebaseStorage.getInstance().getReference().child("Profile Pic").child(myphoneno);
@@ -207,6 +208,24 @@ public class UploadProfilePicActivity extends AppCompatActivity {
                 Log.d(TAG,"error:" + databaseError);
             }
         });
+    }
+
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mdatabaseReference = FirebaseDatabase.getInstance().getReference().child("User Data"); // Used for setting Online status
+        mdatabaseReference.child(myphoneno).child("OnlineStatus").setValue("true");
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mdatabaseReference = FirebaseDatabase.getInstance().getReference().child("User Data"); // Used for setting Online status
+        mdatabaseReference.child(myphoneno).child("OnlineStatus").setValue("false");
+
     }
 
 

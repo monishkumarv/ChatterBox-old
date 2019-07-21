@@ -31,6 +31,7 @@ import java.util.Date;
 public class HomePage extends AppCompatActivity {
 
     private static final String TAG = "HomePageLog";
+    private static final String TAG1 = "ActivityCycle";
     public FirebaseAuth mAuth;
     private FirebaseDatabase mfirebaseDatabase;
     private DatabaseReference mdatabaseReference;
@@ -221,6 +222,22 @@ public class HomePage extends AppCompatActivity {
         Toast.makeText(HomePage.this,"Signout Successfull",Toast.LENGTH_LONG).show();
         Intent i = new Intent(HomePage.this,MainActivity.class);
         startActivity(i);
+
+    }
+
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mdatabaseReference.child(myPhoneNo).child("OnlineStatus").setValue("true");
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mdatabaseReference.child(myPhoneNo).child("OnlineStatus").setValue("false");
 
     }
 

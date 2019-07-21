@@ -62,6 +62,7 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
         SetProfilePic(mFriendslist.get(position),holder);
         setDateTime(mFriendslist.get(position),holder);
         setLastMsg(mFriendslist.get(position),holder);
+        setOnlineStatus(mFriendslist.get(position),holder);
 
         FirebaseDatabase mfirebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mdatabaseReference = mfirebaseDatabase.getReference().child("User Data")
@@ -132,12 +133,14 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
 
         TextView mPhoneNo,date,previousMessage;
         CircleImageView profilepic;
+        ImageView onlinestatus;
         RelativeLayout parentLayout;   //layout of each induvidual units of the list
 
         public ViewHolder(View itemView) {
             super(itemView);
             mPhoneNo = itemView.findViewById(R.id.phone_no);
             profilepic = itemView.findViewById(R.id.friend_profile_pic);
+            onlinestatus = itemView.findViewById(R.id.online_status);
             previousMessage = itemView.findViewById(R.id.previous_message);
             date = itemView.findViewById(R.id.msg_date);
             parentLayout = itemView.findViewById(R.id.layout_list_friends);
@@ -246,6 +249,33 @@ public class RecyclerViewAdapter_Friends extends RecyclerView.Adapter<RecyclerVi
                 } else {
                     holder.previousMessage.setText(" ");
 
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(TAG,"error:" + databaseError);
+            }
+        });
+    }
+
+    public void setOnlineStatus(String phoneNo,ViewHolder holder){
+
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference mReference = mDatabase.getReference().child("User Data")
+                .child(phoneNo)
+                .child("OnlineStatus");
+
+        mReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.exists()) {
+                    if (dataSnapshot.getValue().toString().equals("true")) {
+                        holder.onlinestatus.setVisibility(View.VISIBLE);
+                    } else {
+                        holder.onlinestatus.setVisibility(View.INVISIBLE);
+                    }
                 }
             }
 
