@@ -46,7 +46,6 @@ public class HomePage extends AppCompatActivity {
 
         // Action Bar
         ActionBar ab = getSupportActionBar();
-        ab.setLogo(R.drawable.ic_launcher_foreground);
         ab.setDisplayUseLogoEnabled(false);
         ab.setLogo(R.drawable.ic_message_24dp);
         ab.setDisplayShowHomeEnabled(true);
@@ -218,10 +217,30 @@ public class HomePage extends AppCompatActivity {
 
     }
     public void signOut(){
-        FirebaseAuth.getInstance().signOut();
-        Toast.makeText(HomePage.this,"Signout Successfull",Toast.LENGTH_LONG).show();
-        Intent i = new Intent(HomePage.this,MainActivity.class);
-        startActivity(i);
+
+
+        AlertDialog.Builder a_builder = new AlertDialog.Builder(HomePage.this);
+        // a_builder(variable) is created for AlertBuilder datatype (analogy)
+        a_builder.setMessage("Are u sure?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        FirebaseAuth.getInstance().signOut();
+                        Toast.makeText(HomePage.this,"Signout Successfull",Toast.LENGTH_LONG).show();
+                        Intent i = new Intent(HomePage.this,MainActivity.class);
+                        startActivity(i);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();                        // Close the 'Dialogue box' and resumes the 'App'
+                    }
+                });
+        AlertDialog alert = a_builder.create();
+        alert.setTitle("Logout");
+        alert.show();
 
     }
 
