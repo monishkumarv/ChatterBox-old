@@ -17,7 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
-import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -55,8 +54,7 @@ public class ChatWindow extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setLogo(R.drawable.ic_launcher_foreground);
         ab.setDisplayUseLogoEnabled(false);
-        setTitle(friendPhoneNo);
-        if (name!=null){setTitle(name);}
+        setTitleBar();
 
 
         // Getting Firebase Reference
@@ -201,6 +199,40 @@ public class ChatWindow extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void setTitleBar(){
+
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference mReference = mDatabase.getReference().child("User Data")
+                .child(friendPhoneNo)
+                .child("OnlineStatus");
+
+        mReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.exists()) {
+                    if (dataSnapshot.getValue().toString().equals("true")) {
+                        setTitle(friendPhoneNo + "(online)");
+                        if (name != null)
+                            { setTitle(name + "(online)"); }
+
+                    } else {
+
+                        setTitle(friendPhoneNo);
+                        if (name != null)
+                            { setTitle(name); }
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(TAG,"error:" + databaseError);
+            }
+        });
     }
 
     @Override
