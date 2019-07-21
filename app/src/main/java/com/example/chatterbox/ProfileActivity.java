@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -112,9 +113,10 @@ public class ProfileActivity extends Activity {
 
     public void ChangeDP(View view){
 
-         Intent intent = new Intent(ProfileActivity.this, UploadProfilePicActivity.class);
-         intent.putExtra("MyPhoneNo", phoneno);
-         startActivity(intent);
+        Intent intent = new Intent(ProfileActivity.this, UploadProfilePicActivity.class);
+        intent.putExtra("MyPhoneNo", phoneno);
+        startActivity(intent);
+
     }
 
     public void UpdateDetails(View view){
@@ -154,6 +156,8 @@ public class ProfileActivity extends Activity {
         bio.setFocusableInTouchMode(true);
         submitprofile.setVisibility(View.VISIBLE);
     }
+
+
 
     @Override
     public void onBackPressed() {

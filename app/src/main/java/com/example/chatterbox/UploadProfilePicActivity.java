@@ -73,9 +73,11 @@ public class UploadProfilePicActivity extends AppCompatActivity {
         savepic.setVisibility(View.VISIBLE);
         isEditable.setVisibility(View.INVISIBLE);
 
-        checkFilePermissions();
         setDetails();
         showFileChooser();
+
+        checkFilePermissions();
+
     }
 
     private void checkFilePermissions() {
@@ -85,7 +87,8 @@ public class UploadProfilePicActivity extends AppCompatActivity {
             if (permissionCheck != 0) {
                 this.requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE,android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1001); //Any number
             }
-        }else{ }
+        }else{
+        }
     }
 
 
