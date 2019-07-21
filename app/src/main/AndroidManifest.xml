@@ -24,10 +24,12 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity>        <activity android:name=".UploadProfilePicActivity" />
+        </activity>
+        <activity android:name=".UploadProfilePicActivity"
+            android:theme="@style/ProfileTheme"/>
         <activity
             android:name=".ProfileActivity"
-            android:theme="@style/hidetitlebar"
+            android:theme="@style/ProfileTheme"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ChatWindow"
@@ -44,6 +46,7 @@
         </activity>
         <activity
             android:name=".IntroActivity"
+            android:theme="@style/IntroTheme"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

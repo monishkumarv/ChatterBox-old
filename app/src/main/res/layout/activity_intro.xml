@@ -4,13 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IntroActivity"
-    android:gravity="center">
+    tools:context=".IntroActivity">
+
+    <ImageView
+        android:id="@+id/intro_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/img4" />
 
     <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hiii"
-        android:textSize="50dp"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="Hello"
+        android:textSize="50dp"
+        android:fontFamily="@font/chromatica"
+        android:textColor="#83E8F4"/>
 
 </RelativeLayout>
