@@ -120,7 +120,7 @@ public class ChatWindow extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.chat_recycler_view);
         LinearLayoutManager mlayoutmanager = new LinearLayoutManager(this);
-        RecyclerViewAdapter_Chat adapter = new RecyclerViewAdapter_Chat(this, allMessages,myPhoneNo,friendPhoneNo,isTyping);
+        RecyclerViewAdapter_Chat adapter = new RecyclerViewAdapter_Chat(getApplicationContext(), allMessages,myPhoneNo,friendPhoneNo,isTyping);
         mlayoutmanager.setStackFromEnd(true);
         recyclerView.setLayoutManager(mlayoutmanager);
         recyclerView.setAdapter(adapter);

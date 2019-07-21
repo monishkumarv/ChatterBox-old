@@ -13,11 +13,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -29,6 +31,9 @@ public class ProfileActivity extends Activity {
     private String TAG = "ProfileActivityLog";
     public Button iseditable,submitprofile;
     public TextView createprofileTv;
+
+    public FirebaseAuth mAuth;
+    private DatabaseReference mdatabaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +99,7 @@ public class ProfileActivity extends Activity {
 
                 // Profile Picture Setting
                 if (dataSnapshot.child("Profile Pic").exists())
-                { Glide.with(ProfileActivity.this).asBitmap()
+                { Glide.with(getApplicationContext()).asBitmap()
                         .load(dataSnapshot.child("Profile Pic").getValue().toString()).into(profilepic); }
             }
 
@@ -148,5 +153,28 @@ public class ProfileActivity extends Activity {
         gender.setFocusableInTouchMode(true);
         bio.setFocusableInTouchMode(true);
         submitprofile.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth = FirebaseAuth.getInstance();
+        mdatabaseReference = FirebaseDatabase.getInstance().getReference().child("User Data");
+        mdatabaseReference.child(mAuth.getCurrentUser().getPhoneNumber()).child("OnlineStatus").setValue("true");
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mAuth = FirebaseAuth.getInstance();
+        mdatabaseReference = FirebaseDatabase.getInstance().getReference().child("User Data");
+        mdatabaseReference.child(mAuth.getCurrentUser().getPhoneNumber()).child("OnlineStatus").setValue("false");
+
     }
 }

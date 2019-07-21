@@ -14,7 +14,16 @@
         android:roundIcon="@drawable/ic_message_blue_24dp"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UploadProfilePicActivity" />
+        <activity
+            android:name=".IntroActivity"
+            android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>        <activity android:name=".UploadProfilePicActivity" />
         <activity
             android:name=".ProfileActivity"
             android:theme="@style/hidetitlebar"

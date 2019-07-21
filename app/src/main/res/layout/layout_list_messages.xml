@@ -10,8 +10,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginTop="0dp"
-        android:id="@+id/friend_profile_pic"
-        android:onClick="ChangeDP"/>
+        android:id="@+id/friend_profile_pic" />
 
 
 

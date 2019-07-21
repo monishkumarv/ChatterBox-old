@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,7 +41,7 @@ public class UploadProfilePicActivity extends AppCompatActivity {
     private Button savepic,isEditable;
     private Uri filePath;
     private StorageReference storageReference;
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference,mdatabaseReference;
     private String myphoneno;
     private static final int PICK_IMAGE_REQUEST = 111;
 
@@ -198,7 +199,7 @@ public class UploadProfilePicActivity extends AppCompatActivity {
 
                 // Profile Picture Setting
                 if (dataSnapshot.child("Profile Pic").exists())
-                { Glide.with(UploadProfilePicActivity.this).asBitmap()
+                { Glide.with(getApplicationContext()).asBitmap()
                         .load(dataSnapshot.child("Profile Pic").getValue().toString()).into(profilepic); }
             }
 
@@ -207,6 +208,22 @@ public class UploadProfilePicActivity extends AppCompatActivity {
                 Log.d(TAG,"error:" + databaseError);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mdatabaseReference = FirebaseDatabase.getInstance().getReference().child("User Data");
+        mdatabaseReference.child(myphoneno).child("OnlineStatus").setValue("true");
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mdatabaseReference = FirebaseDatabase.getInstance().getReference().child("User Data");
+        mdatabaseReference.child(myphoneno).child("OnlineStatus").setValue("false");
+
     }
 
 
