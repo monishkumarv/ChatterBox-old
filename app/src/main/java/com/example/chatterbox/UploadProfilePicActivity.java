@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Build;
 import android.provider.MediaStore;
 import android.os.Bundle;
@@ -38,14 +39,14 @@ public class UploadProfilePicActivity extends AppCompatActivity {
 
     public EditText name,dob,phone,email,gender,bio;
     private CircleImageView profilepic;
-    private Button savepic,isEditable;
+    private Button isEditable;
     private Uri filePath;
     private StorageReference storageReference;
     private DatabaseReference databaseReference,mdatabaseReference;
     private String myphoneno;
     private static final int PICK_IMAGE_REQUEST = 111;
 
-    private String TAG = "UploadProfilePicActivity";
+    private String TAG = "UploadProfilePicActivityLog";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,6 @@ public class UploadProfilePicActivity extends AppCompatActivity {
         gender = findViewById(R.id.male_female);
         profilepic = findViewById(R.id.profile_pic);
         bio = findViewById(R.id.bio_et);
-        savepic = findViewById(R.id.save_pic);
         isEditable = findViewById(R.id.is_editable);
 
         Intent i = getIntent();
@@ -70,13 +70,11 @@ public class UploadProfilePicActivity extends AppCompatActivity {
 
 
         profilepic.setEnabled(false);
-        savepic.setVisibility(View.VISIBLE);
         isEditable.setVisibility(View.INVISIBLE);
 
+        checkFilePermissions();
         setDetails();
         showFileChooser();
-
-        checkFilePermissions();
 
     }
 
@@ -107,15 +105,16 @@ public class UploadProfilePicActivity extends AppCompatActivity {
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 profilepic.setImageBitmap(bitmap);
+                UploadImage();
 
             } catch (IOException e) {
-                e.printStackTrace();
+                Log.d(TAG,e.toString());
             }
         }
     }
 
 
-    public void UploadImage(View view) {
+    public void UploadImage() {
 
         if (filePath != null) {
 
@@ -157,7 +156,6 @@ public class UploadProfilePicActivity extends AppCompatActivity {
             //if there is not any file
             Toast.makeText(getApplicationContext(), "Please choose a Picture", Toast.LENGTH_LONG).show();
         }
-        savepic.setVisibility(View.INVISIBLE);
     }
 
 

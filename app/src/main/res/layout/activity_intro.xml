@@ -21,6 +21,6 @@
         android:text="Hello"
         android:textSize="50dp"
         android:fontFamily="@font/chromatica"
-        android:textColor="#83E8F4"/>
+        android:textColor="#62BADC"/>
 
 </RelativeLayout>
